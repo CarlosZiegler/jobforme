@@ -9,7 +9,7 @@ function Topbar() {
 	return (<header data-testid="topbar" className="topbar">
 		<div className="container">
 			<a href="/" className="topbar__logo">
-				<h1>Job for me</h1>
+				<h1>#Jobforme</h1>
 			</a>
 		</div>
 	</header>);

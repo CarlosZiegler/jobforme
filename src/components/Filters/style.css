@@ -4,3 +4,19 @@
   flex-wrap: nowrap;
   padding: 24px 0;
 }
+.btn-add{
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #9FA9BC;
+  display: flex;
+  flex-wrap: nowrap;
+  font-size: 1.3rem;
+  font-weight: normal;
+  justify-content: center;
+  margin: 0 8px;
+  padding: 10px;
+  white-space: nowrap;
+
+}
