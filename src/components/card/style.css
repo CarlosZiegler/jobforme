@@ -29,5 +29,16 @@
 .contact-info{
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+}
+.lowercase{
+    text-transform: lowercase;
+}
+
+a, a:link, a:visited{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    background:rgba(148, 199, 254, 0.333)
 }

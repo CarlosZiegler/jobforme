@@ -21,11 +21,11 @@ function Card(props) {
                 </p>
             </div>
             <div className="card-body">
-                <p className="contact-info">
-                    <img className="icon" src={linkedinIcon} alt="Linkedin Icon" />{linkedin}
+                <p className="contact-info lowercase">
+                    <img className="icon" src={linkedinIcon} alt="Linkedin Icon" /><a href={linkedin} target='_blank' rel="noopener noreferrer" >{linkedin}</a>
                 </p>
-                <p className="contact-info">
-                    <img className="icon" src={emailIcon} alt="Linkedin Icon" />{email}
+                <p className="contact-info lowercase">
+                    <img className="icon" src={emailIcon} alt="Linkedin Icon" /><a href={`mailto:${email}`} >{email}</a>
                 </p>
                 <p className="contact-info">
                     <img className="icon" src={houseIcon} alt="Linkedin Icon" />{cidade}
