@@ -13,10 +13,10 @@ function Card(props) {
     return (
         <div className="card">
             <div className="card-header">
-                <p>
+                <p className="card-name">
                     {name}
                 </p>
-                <p>
+                <p className="card-position">
                     {cargo}
                 </p>
             </div>

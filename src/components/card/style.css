@@ -4,10 +4,8 @@
     justify-content: center;
     align-items: center;
     margin:5px;
-    border-top: 30px solid rgb(44, 116, 240);
-    border-bottom: 30px solid rgb(44, 116, 240);
+    border: 2px solid rgb(44, 116, 240);
     width: 350px;
-    
     text-align: center;
 
 }
@@ -16,6 +14,17 @@
     border-bottom: 1px solid black;
     margin:5px;
     text-transform: capitalize;
+}
+.card-name{
+    font-size: 1.3rem;
+    font-weight: bold;
+
+}
+.card-position{
+    text-align: center;
+    border-radius: 5px;
+    background:rgb(92, 201, 247);
+    padding: 5px;
 }
 .card-body{
     margin:5px;
