@@ -1,0 +1,33 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:5px;
+    border-top: 30px solid rgb(44, 116, 240);
+    border-bottom: 30px solid rgb(44, 116, 240);
+    width: 300px;
+    
+    text-align: center;
+
+}
+.card-header{
+    width:80%;
+    border-bottom: 1px solid black;
+    margin:5px;
+    text-transform: capitalize;
+}
+.card-body{
+    margin:5px;
+
+}
+.icon{
+    width:25px;
+    align-self: center;
+    margin-right:5px
+}
+.contact-info{
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
