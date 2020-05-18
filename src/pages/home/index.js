@@ -4,12 +4,27 @@ import Lottie from 'react-lottie';
 import Card from '../../components/card'
 import loadingData from '../../assets/loading.json'
 
+import Topbar from '../../components/Topbar'
+import Filters from '../../components/Filters'
+
+
 import api from '../../services/api'
+import groupByAttribute from '../../utils/groupByAttribute'
+import searchData from '../../utils/searchData'
+
 
 import './style.css'
 
 export default function Home() {
+
+
+
+
+
     const [profiles, setProfiles] = useState([])
+    const [showProfiles, setShowProfiles] = useState([])
+    const [filter, setFilter] = useState('')
+    const [sort, setSort] = useState('')
     const [isloading, setIsloading] = useState(true)
     const [error, setError] = useState(null)
 
@@ -20,24 +35,20 @@ export default function Home() {
 
     }
 
-    function agruparPor(objetoArray, propriedade) {
-        return objetoArray.reduce(function (acc, obj) {
-            let key = obj[propriedade];
-            if (!acc[key]) {
-                acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-        }, {});
+    //Real time seaching
+    const handlerSearchOnChange = async (event) => {
+        const result = searchData(profiles, event.target.value)
+        console.log(result)
+        setShowProfiles(result)
+
     }
+
 
     useEffect(() => {
 
         async function fetchData() {
             const response = await api('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
             setTimeout(() => {
-                console.log(response.feed)
-
                 const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
                     return {
                         value: gs$cell.inputValue,
@@ -45,13 +56,11 @@ export default function Home() {
                     }
                 })
 
-                let rows = Object.values(agruparPor(arrayProfile, 'row'))
+                let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
                 let data = rows.map(row => row.map(element => element.value))
                 console.log('data->', data)
-
-
-
                 setProfiles(data)
+                setShowProfiles(data)
                 setIsloading(false)
             }, 1000)
 
@@ -64,13 +73,15 @@ export default function Home() {
             setError(error)
         }
 
-
     }, [])
 
     return (
         <>
             <div>
-                <h1>#jobforme</h1>
+                <Topbar />
+                <Filters
+                    handlerOnchange={handlerSearchOnChange}
+                />
                 {isloading &&
                     <div className="loading">
                         <Lottie className="lottieFile" options={defaultOptions}
@@ -80,8 +91,8 @@ export default function Home() {
                     </div>
                 }
                 <div className="container" >
-                    {profiles.length > 0 && profiles.map((profile, index) => {
-                        if (index === 0) {
+                    {showProfiles.length > 0 && showProfiles.map((profile, index) => {
+                        if (profile[0] === "Timestamp") {
                             return null
                         }
                         return <Card
@@ -94,6 +105,7 @@ export default function Home() {
                             cidade={profile[5]}
                         />
                     })}
+                    {showProfiles.length === 0 && <h2>Nenhum candidato corresponde ao cargo</h2>}
                 </div>
             </div>
         </>

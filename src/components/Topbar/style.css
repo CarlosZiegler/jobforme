@@ -1,0 +1,17 @@
+.topbar {
+  
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .07);
+  
+  padding: 10px 16px;
+  
+  
+  width: 100%;
+}
+
+.topbar .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
