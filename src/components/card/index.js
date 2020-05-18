@@ -22,7 +22,7 @@ function Card(props) {
             </div>
             <div className="card-body">
                 <p className="contact-info lowercase">
-                    <img className="icon" src={linkedinIcon} alt="Linkedin Icon" /><a href={linkedin} target='_blank' rel="noopener noreferrer" >{linkedin}</a>
+                    <a href={linkedin} target='_blank' rel="noopener noreferrer" ><img className="icon" src={linkedinIcon} alt="Linkedin Icon" /></a>
                 </p>
                 <p className="contact-info lowercase">
                     <img className="icon" src={emailIcon} alt="Linkedin Icon" /><a href={`mailto:${email}`} >{email}</a>
