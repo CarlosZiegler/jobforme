@@ -23,6 +23,7 @@ export default function Home() {
 
     const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState([])
+    const [qtdProfiles, setQtdProfiles] = useState(null)
     const [filter, setFilter] = useState('')
     const [sort, setSort] = useState('')
     const [isloading, setIsloading] = useState(true)
@@ -61,6 +62,7 @@ export default function Home() {
                 console.log('data->', data)
                 setProfiles(data)
                 setShowProfiles(data)
+                setQtdProfiles(data.length)
                 setIsloading(false)
             }, 1000)
 
@@ -82,6 +84,10 @@ export default function Home() {
                 <Filters
                     handlerOnchange={handlerSearchOnChange}
                 />
+                {qtdProfiles &&
+                    <div className="container">
+                        <span className="profile-count" >Perfis cadastrados:{qtdProfiles}</span>
+                    </div>}
                 {isloading &&
                     <div className="loading">
                         <Lottie className="lottieFile" options={defaultOptions}
@@ -105,7 +111,7 @@ export default function Home() {
                             cidade={profile[5]}
                         />
                     })}
-                    {showProfiles.length === 0 && <h2>Nenhum candidato corresponde ao cargo</h2>}
+                    {showProfiles.length === 0 && !isloading && <h2>Nenhum candidato corresponde ao cargo</h2>}
                 </div>
             </div>
         </>

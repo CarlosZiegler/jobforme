@@ -7,4 +7,15 @@
 h1{
     text-align: center;
 }
+.profile-count{
+    
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    padding:10px 20px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: 2px solid rgba(10, 116, 0, 0.4);
+    
+}
 
