@@ -13,9 +13,9 @@ function Card(props) {
     return (
         <div className="card">
             <div className="card-header">
-                <p className="card-name">
+                <h3 className="card-name">
                     {name}
-                </p>
+                </h3>
                 <p className="card-position">
                     {cargo}
                 </p>

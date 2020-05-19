@@ -4,9 +4,10 @@
     justify-content: center;
     align-items: center;
     margin:5px;
-    border: 2px solid rgb(44, 116, 240);
+    border: 1px solid rgb(130, 130, 130);
     width: 350px;
     text-align: center;
+    border-radius: 15px;
 
 }
 .card-header{
@@ -14,16 +15,17 @@
     border-bottom: 1px solid black;
     margin:5px;
     text-transform: capitalize;
+    
 }
 .card-name{
-    font-size: 1.3rem;
     font-weight: bold;
+    text-transform:capitalize;
 
 }
 .card-position{
     text-align: center;
     border-radius: 5px;
-    background:rgb(92, 201, 247);
+    background:rgb(222, 222, 222);
     padding: 5px;
 }
 .card-body{
@@ -49,5 +51,5 @@ a, a:link, a:visited{
     color: black;
 }
 a:hover{
-    background:rgba(148, 199, 254, 0.333)
+    background:rgba(169, 169, 169, 0.333)
 }
