@@ -3,6 +3,7 @@ import Lottie from 'react-lottie';
 
 import Card from '../../components/card'
 import loadingData from '../../assets/loading.json'
+import hiringData from '../../assets/15563-hiring-isometric-animation (1).json'
 
 import Topbar from '../../components/Topbar'
 import Filters from '../../components/Filters'
@@ -17,10 +18,6 @@ import './style.css'
 
 export default function Home() {
 
-
-
-
-
     const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState([])
     const [qtdProfiles, setQtdProfiles] = useState(null)
@@ -33,6 +30,12 @@ export default function Home() {
         loop: true,
         autoplay: true,
         animationData: loadingData,
+
+    }
+    const hiringOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: hiringData,
 
     }
 
@@ -80,7 +83,15 @@ export default function Home() {
     return (
         <>
             <div>
-                <Topbar />
+                <div className="header-page">
+                    <Topbar />
+                    <div className="hiring">
+                        <Lottie className="lottieFile" options={hiringOptions}
+                            height={"60%"}
+                            width={"60%"}
+                        />
+                    </div>
+                </div>
                 <Filters
                     handlerOnchange={handlerSearchOnChange}
                 />
