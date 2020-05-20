@@ -21,8 +21,7 @@ export default function Home() {
     const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState([])
     const [qtdProfiles, setQtdProfiles] = useState(null)
-    const [filter, setFilter] = useState('')
-    const [sort, setSort] = useState('')
+
     const [isloading, setIsloading] = useState(true)
     const [error, setError] = useState(null)
 
@@ -39,7 +38,6 @@ export default function Home() {
 
     }
 
-    //Real time seaching
     const handlerSearchOnChange = async (event) => {
         const result = searchData(profiles, event.target.value)
         console.log(result)
@@ -62,7 +60,7 @@ export default function Home() {
 
                 let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
                 let data = rows.map(row => row.map(element => element.value))
-                console.log('data->', data)
+
                 setProfiles(data)
                 setShowProfiles(data)
                 setQtdProfiles(data.length)
@@ -73,9 +71,8 @@ export default function Home() {
 
         try {
             fetchData()
-        } catch (error) {
-            console.log(error)
-            setError(error)
+        } catch (e) {
+            setError(e)
         }
 
     }, [])
