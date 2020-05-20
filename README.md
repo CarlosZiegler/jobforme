@@ -1,5 +1,10 @@
 Site do Bem - #Jobsforme
 
+#Instalação
+
+```
+Yarn install
+```
 
 ## Motivo
 Procurando ajudar as pessoas que foram desligadas antes e durante a pandemia, desenvolvemos
