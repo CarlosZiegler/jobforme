@@ -33,8 +33,7 @@ Qualquer ajuda que agregue valor ao projeto e consequentemente a vida das pessoa
 
 ## Colaboradores
 
-| [<img src="https://avatars2.githubusercontent.com/u/51726945?s=460&u=d5955a541dbd8ec498acdfb669fbb81e531ee04c&v=4" width=115><br><sub>Carlos Ziegler</sub>](https://github.com/vitorserrano) |
-| :---: | :---: |
+| [<img src="https://avatars2.githubusercontent.com/u/51726945?s=460&u=d5955a541dbd8ec498acdfb669fbb81e531ee04c&v=4" width=115><br><sub>Vitor Serrano</sub>](https://github.com/vitorserrano) |
 
 ## Licença
 
