@@ -22,9 +22,11 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 Qualquer ajuda que agregue valor ao projeto e consequentemente a vida das pessoas é muito bem vindo, por isso decidimos torna-lo opensource.
 
 - Faça um Fork desse repositório,
+- Faça um clone do respositório criado a partir do fork: `git clone https://github.com/seuusuario/jobforme.git`
 - Crie uma branch com a sua feature: `git checkout -b my-feature`
 - Commit suas mudanças: `git commit -m 'feat: My new feature'`
 - Push a sua branch: `git push origin my-feature`
+- Ir em [Pull Requests](https://github.com/CarlosZiegler/jobforme/pulls) do projeto original e criar uma pull request com o seu commit
 
 ## Autores
 
@@ -33,7 +35,7 @@ Qualquer ajuda que agregue valor ao projeto e consequentemente a vida das pessoa
 
 ## Colaboradores
 
-| [<img src="https://avatars2.githubusercontent.com/u/51726945?s=460&u=d5955a541dbd8ec498acdfb669fbb81e531ee04c&v=4" width=115><br><sub>Vitor Serrano</sub>](https://github.com/vitorserrano) |
+| [<img src="https://avatars2.githubusercontent.com/u/51726945?s=460&u=d5955a541dbd8ec498acdfb669fbb81e531ee04c&v=4" width=115><br><sub>Vitor Serrano</sub>](https://github.com/vitorserrano)
 
 ## Licença
 
