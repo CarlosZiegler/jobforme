@@ -27,7 +27,7 @@ A plataforma Job for Me tem como objetivo deixar visível para recrutadores prof
 
 ## :interrobang: Motivo
 
-Procurando ajudar as pessoas que foram desligadas antes e durante a pandemia, desenvolvemos esse projeto com o intuito de gerar a principio um banco de profisssionais independente do cargao, área ou experiência para facilitar a vida dos recrutadores.
+Procurando ajudar as pessoas que foram desligadas antes e durante a pandemia, desenvolvemos esse projeto com o intuito de gerar a principio um banco de profisssionais independente do cargo, área ou experiência para facilitar a vida dos recrutadores.
 
 ## :rocket: Tecnologias Utilizadas
 
