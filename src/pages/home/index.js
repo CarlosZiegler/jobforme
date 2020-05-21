@@ -25,16 +25,18 @@ export default function Home() {
     const [textContextButton, setTextContextButton] = useState("Ir para Vagas")
     const [isRecruiter, setIsRecruiter] = useState(false)
     const [urlFetchData, seturlFetchData] = useState('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
-
     const [isloading, setIsloading] = useState(true)
     const [error, setError] = useState(null)
 
+    // Configuration of LottieFiles
     const hiringOptions = {
         loop: true,
         autoplay: true,
         animationData: hiringData,
 
     }
+
+    // Configuration of LottieFiles
     const loadingOptions = {
         loop: true,
         autoplay: true,
@@ -42,35 +44,47 @@ export default function Home() {
 
     }
 
+    /** 
+     * The code below will find the Job position
+    */
     const handlerSearchOnChange = async (event) => {
         const result = searchData(profiles, event.target.value)
-        console.log(result)
         setShowProfiles(result)
-
     }
+
+    /** 
+     * The code below will set State of App 
+     * Recruiter can be added Jobs and Users can be added Profiles
+    */
     const handlerUserchange = async (event) => {
         event.preventDefault()
+
         setIsRecruiter(!isRecruiter)
+
+        // fetch data of Jobs or Professional
         if (!isRecruiter) {
-            console.log('isRecruiter', isRecruiter)
             seturlFetchData('https://spreadsheets.google.com/feeds/cells/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full?alt=json')
             setTextContextButton('Ir para Profissionais')
-            setAddButtonText('Adicionar Perfil')
+            setAddButtonText('Adicionar Vaga')
+
             //url form for Recruiter add Jobs
             setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         } else {
             seturlFetchData('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
             setTextContextButton('Ir para Vagas')
-            setAddButtonText('Adicionar Vaga')
+            setAddButtonText('Adicionar Perfil')
+
 
             //url form for Professional add Profile
             setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         }
 
-
-
     }
 
+    /** 
+     * The code below fetching data from URL.
+     * The Url will be of Profiles or Jobs
+    */
     async function fetchData(dataUrl) {
         // initialize loading Animation
         setIsloading(true)
@@ -121,7 +135,6 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="section-profile-user">
-
                     <button className="btn-profile" onClick={handlerUserchange}>{textContextButton}</button>
                 </div>
 
