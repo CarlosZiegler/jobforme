@@ -7,6 +7,7 @@ import hiringData from '../../assets/15563-hiring-isometric-animation (1).json'
 
 import Topbar from '../../components/Topbar'
 import Filters from '../../components/Filters'
+import Footer from '../../components/Footer';
 
 
 import api from '../../services/api'
@@ -15,6 +16,7 @@ import searchData from '../../utils/searchData'
 
 
 import './style.css'
+
 
 export default function Home() {
 
@@ -40,9 +42,7 @@ export default function Home() {
 
     const handlerSearchOnChange = async (event) => {
         const result = searchData(profiles, event.target.value)
-        console.log(result)
         setShowProfiles(result)
-
     }
 
 
@@ -84,8 +84,8 @@ export default function Home() {
                     <Topbar />
                     <div className="hiring">
                         <Lottie className="lottieFile" options={hiringOptions}
-                            height={"60%"}
-                            width={"60%"}
+                            height={"20%"}
+                            width={"20%"}
                         />
                     </div>
                 </div>
@@ -94,13 +94,13 @@ export default function Home() {
                 />
                 {qtdProfiles &&
                     <div className="container">
-                        <span className="profile-count" >Perfis cadastrados:{qtdProfiles}</span>
+                        <span className="profile-count" >{qtdProfiles} Perfis cadastrados</span>
                     </div>}
                 {isloading &&
                     <div className="loading">
                         <Lottie className="lottieFile" options={defaultOptions}
-                            height={"100%"}
-                            width={"100%"}
+                            height={"30%"}
+                            width={"30%"}
                         />
                     </div>
                 }
@@ -120,7 +120,9 @@ export default function Home() {
                         />
                     })}
                     {showProfiles.length === 0 && !isloading && <h2>Nenhum candidato corresponde ao cargo</h2>}
+                    {showProfiles.length > 0 ? <Footer /> : ''}
                 </div>
+
             </div>
         </>
     )

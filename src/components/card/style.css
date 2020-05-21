@@ -4,18 +4,17 @@
     justify-content: center;
     align-items: center;
     margin:5px;
-    border: 1px solid rgb(130, 130, 130);
     width: 350px;
     text-align: center;
-    border-radius: 15px;
-
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.333);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.333);
 }
 .card-header{
     width:80%;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ccc;
     margin:5px;
     text-transform: capitalize;
-    
 }
 .card-name{
     font-weight: bold;
@@ -24,13 +23,17 @@
 }
 .card-position{
     text-align: center;
-    border-radius: 5px;
-    background:rgb(222, 222, 222);
+    border-radius: 4px;
+    background:#4c84ff;
+    color: #fff;
     padding: 5px;
 }
 .card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin:5px;
-
+    width: 80%;
 }
 .icon{
     width:25px;
@@ -51,5 +54,5 @@ a, a:link, a:visited{
     color: black;
 }
 a:hover{
-    background:rgba(169, 169, 169, 0.333)
+    color: #4c84ff
 }
