@@ -22,7 +22,7 @@ export default function Home() {
     const [qtdProfiles, setQtdProfiles] = useState(null)
     const [urlForm, setUrlForm] = useState("https://forms.gle/fxWpig6SHWVhBPj26")
     const [addButtonText, setAddButtonText] = useState("Adicionar Perfil")
-    const [textContextButton, setTextContextButton] = useState("Vagas")
+    const [textContextButton, setTextContextButton] = useState("Ir para Vagas")
     const [isRecruiter, setIsRecruiter] = useState(false)
     const [urlFetchData, seturlFetchData] = useState('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
 
@@ -54,13 +54,13 @@ export default function Home() {
         if (!isRecruiter) {
             console.log('isRecruiter', isRecruiter)
             seturlFetchData('https://spreadsheets.google.com/feeds/cells/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full?alt=json')
-            setTextContextButton('Profissionais')
+            setTextContextButton('Ir para Profissionais')
             setAddButtonText('Adicionar Perfil')
             //url form for Recruiter add Jobs
             setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         } else {
             seturlFetchData('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
-            setTextContextButton('Vagas')
+            setTextContextButton('Ir para Vagas')
             setAddButtonText('Adicionar Vaga')
 
             //url form for Professional add Profile
@@ -120,6 +120,11 @@ export default function Home() {
                         />
                     </div>
                 </div>
+                <div className="section-profile-user">
+
+                    <button className="btn-profile" onClick={handlerUserchange}>{textContextButton}</button>
+                </div>
+
                 <Filters
                     handlerOnchange={handlerSearchOnChange}
                     urlButton={urlForm}
