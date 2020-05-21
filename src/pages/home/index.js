@@ -136,6 +136,10 @@ export default function Home() {
                 </div>
                 <div className="section-profile-user">
                     <button className="btn-profile" onClick={handlerUserchange}>{textContextButton}</button>
+                    <p className="text-alert-section">{isRecruiter ?
+                        'Você está na área reservada para que os recrutadores postem suas vagas e você que é profissional pode visualizar essas vagas e se candidatar.'
+                        : 'Você está na área reservada para os profissionais, aqui você pode cadastrar o seu perfil e os recrutadores podem visualiza-los.'
+                    }</p>
                 </div>
 
                 <Filters
