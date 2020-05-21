@@ -20,6 +20,11 @@ export default function Home() {
     const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState([])
     const [qtdProfiles, setQtdProfiles] = useState(null)
+    const [urlForm, setUrlForm] = useState("https://forms.gle/fxWpig6SHWVhBPj26")
+    const [addButtonText, setAddButtonText] = useState("Adicionar Perfil")
+    const [textContextButton, setTextContextButton] = useState("Vagas")
+    const [isRecruiter, setIsRecruiter] = useState(false)
+    const [urlFetchData, seturlFetchData] = useState('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
 
     const [isloading, setIsloading] = useState(true)
     const [error, setError] = useState(null)
@@ -43,38 +48,65 @@ export default function Home() {
         setShowProfiles(result)
 
     }
+    const handlerUserchange = async (event) => {
+        event.preventDefault()
+        setIsRecruiter(!isRecruiter)
+        if (!isRecruiter) {
+            console.log('isRecruiter', isRecruiter)
+            seturlFetchData('https://spreadsheets.google.com/feeds/cells/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full?alt=json')
+            setTextContextButton('Profissionais')
+            setAddButtonText('Adicionar Perfil')
+            //url form for Recruiter add Jobs
+            setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
+        } else {
+            seturlFetchData('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
+            setTextContextButton('Vagas')
+            setAddButtonText('Adicionar Vaga')
 
-
-    useEffect(() => {
-
-        async function fetchData() {
-            const response = await api('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
-            setTimeout(() => {
-                const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
-                    return {
-                        value: gs$cell.inputValue,
-                        row: gs$cell.row
-                    }
-                })
-
-                let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
-                let data = rows.map(row => row.map(element => element.value))
-
-                setProfiles(data)
-                setShowProfiles(data)
-                setQtdProfiles(data.length)
-                setIsloading(false)
-            }, 1000)
-
+            //url form for Professional add Profile
+            setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         }
 
+
+
+    }
+
+    async function fetchData(dataUrl) {
+        // initialize loading Animation
+        setIsloading(true)
+
+        // get data from url
+        const response = await api(dataUrl)
+
+        // saving in a array the response
+        const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
+            return {
+                value: gs$cell.inputValue,
+                row: gs$cell.row
+            }
+        })
+
+        // group the response per row from Google Spreadsheets 
+        let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
+        let data = rows.map(row => row.map(element => element.value))
+
+        // set state to app ready
+        setProfiles(data)
+        setShowProfiles(data)
+        setQtdProfiles(data.length - 1)
+        setIsloading(false)
+
+    }
+
+    // Fetch data if variable isRecruiter was changed
+    useEffect(() => {
         try {
-            fetchData()
+            fetchData(urlFetchData)
         } catch (e) {
             setError(e)
         }
 
-    }, [])
+    }, [isRecruiter])
 
     return (
         <>
@@ -90,10 +122,14 @@ export default function Home() {
                 </div>
                 <Filters
                     handlerOnchange={handlerSearchOnChange}
+                    urlButton={urlForm}
+                    handlerUserchange={handlerUserchange}
+                    textButton={addButtonText}
+                    textContextButton={textContextButton}
                 />
-                {qtdProfiles &&
+                {qtdProfiles > 0 &&
                     <div className="container">
-                        <span className="profile-count" >Perfis cadastrados:{qtdProfiles}</span>
+                        <span className="profile-count" >Cadastrados: {qtdProfiles} </span>
                     </div>}
                 {isloading &&
                     <div className="loading">
@@ -105,6 +141,7 @@ export default function Home() {
                 }
                 <div className="container" >
                     {showProfiles.length > 0 && showProfiles.map((profile, index) => {
+                        // first element form array will the Table header.
                         if (profile[0] === "Timestamp") {
                             return null
                         }
