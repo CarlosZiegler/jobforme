@@ -23,7 +23,7 @@
 
 ## :information_source: Sobre
 
-A plataforma Job for Me tem como objetivo deixar visíveis para recrutadores pessoas que estão disponíveis para uma oportunidade de acordo com sua localização e seu cargo.
+A plataforma Job for Me tem como objetivo deixar visível para recrutadores pessoas que estão disponíveis para uma oportunidade de acordo com sua localização e seu cargo.
 
 ## :interrobang: Motivo
 
@@ -36,6 +36,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 - [ReactJS](https://reactjs.org/)
 
 ## :link: Como contribuir
+
 Qualquer ajuda que agregue valor ao projeto e consequentemente a vida das pessoas é muito bem vindo, por isso decidimos torna-lo opensource.
 
 - Faça um Fork desse repositório,
