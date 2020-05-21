@@ -10,7 +10,7 @@ Este projeto é uma aplicação para conectar pessoas que estão em busca de um 
 
 ## Motivo?
 
-Procurando ajudar as pessoas que foram desligadas antes e durante a pandemia, desenvolvemos esse projeto com o intuito de gerar a principio um Banco de Profisssionais. Independente do Cargao, Área ou experiência para facilitar a vida dos Recrutadores.
+Procurando ajudar as pessoas que foram desligadas antes e durante a pandemia, desenvolvemos esse projeto com o intuito de gerar a principio um Banco de Profisssionais. Independente do cargo, área ou experiência para facilitar a vida dos Recrutadores.
 
 ## Tecnologias Utilizadas
 
@@ -27,6 +27,25 @@ Qualquer ajuda que agregue valor ao projeto e consequentemente a vida das pessoa
 - Commit suas mudanças: `git commit -m 'feat: My new feature'`
 - Push a sua branch: `git push origin my-feature`
 - Ir em [Pull Requests](https://github.com/CarlosZiegler/jobforme/pulls) do projeto original e criar uma pull request com o seu commit
+
+## Mantendo um fork atualizado
+
+-Clonei o meu fork:
+`git clone https://github.com/seuusuario/jobforme.git`
+-Adicionei um remote para o repositório original:( *meufork é o nome do meu remote, poderia ser outro nome. )
+`git remote add meufork https://github.com/seuusuario/jobforme.git`
+-Atualizei o remote meufork
+`git fetch meufork`
+-Fiz o rebase do master com o master do meufork
+`git rebase meufork/master`
+
+Pronto, agora repositório está atualizado. Agora toda vez que eu quiser atualizar a minha branch master com o repositório original eu uso:
+`git fetch meufork `
+`git rebase meufork/master`
+
+E para fazer o push do repositório eu uso
+
+`git push origin master`
 
 ## Autores
 
