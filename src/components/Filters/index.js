@@ -7,7 +7,7 @@ import './style.css'
 
 function Filters(props) {
 
-	const { handlerOnchange, urlButton, textButton, handlerUserchange, textContextButton } = props
+	const { handlerOnchange, urlButton, textButton } = props
 	return (
 
 		<div className="container" data-testid="filters">
