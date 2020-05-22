@@ -23,16 +23,15 @@ export default function Home() {
     const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState([])
     const [qtdProfiles, setQtdProfiles] = useState(null)
-
+    const [urlForm, setUrlForm] = useState("https://forms.gle/fxWpig6SHWVhBPj26")
+    const [addButtonText, setAddButtonText] = useState("Adicionar Perfil")
+    const [textContextButton, setTextContextButton] = useState("Ir para Vagas")
+    const [isRecruiter, setIsRecruiter] = useState(false)
+    const [urlFetchData, seturlFetchData] = useState('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
     const [isloading, setIsloading] = useState(true)
     const [error, setError] = useState(null)
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: loadingData,
-
-    }
+    // Configuration of LottieFiles
     const hiringOptions = {
         loop: true,
         autoplay: true,
@@ -40,42 +39,91 @@ export default function Home() {
 
     }
 
+    // Configuration of LottieFiles
+    const loadingOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: loadingData,
+
+    }
+
+    /** 
+     * The code below will find the Job position
+    */
     const handlerSearchOnChange = async (event) => {
         const result = searchData(profiles, event.target.value)
         setShowProfiles(result)
     }
 
+    /** 
+     * The code below will set State of App 
+     * Recruiter can be added Jobs and Users can be added Profiles
+    */
+    const handlerUserchange = async (event) => {
+        event.preventDefault()
 
-    useEffect(() => {
+        setIsRecruiter(!isRecruiter)
 
-        async function fetchData() {
-            const response = await api('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
-            setTimeout(() => {
-                const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
-                    return {
-                        value: gs$cell.inputValue,
-                        row: gs$cell.row
-                    }
-                })
+        // fetch data of Jobs or Professional
+        if (!isRecruiter) {
+            seturlFetchData('https://spreadsheets.google.com/feeds/cells/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full?alt=json')
+            setTextContextButton('Ir para Profissionais')
+            setAddButtonText('Adicionar Vaga')
 
-                let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
-                let data = rows.map(row => row.map(element => element.value))
+            //url form for Recruiter add Jobs
+            setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
+        } else {
+            seturlFetchData('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
+            setTextContextButton('Ir para Vagas')
+            setAddButtonText('Adicionar Perfil')
 
-                setProfiles(data)
-                setShowProfiles(data)
-                setQtdProfiles(data.length)
-                setIsloading(false)
-            }, 1000)
 
+            //url form for Professional add Profile
+            setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         }
 
+    }
+
+    /** 
+     * The code below fetching data from URL.
+     * The Url will be of Profiles or Jobs
+    */
+    async function fetchData(dataUrl) {
+        // initialize loading Animation
+        setIsloading(true)
+
+        // get data from url
+        const response = await api(dataUrl)
+
+        // saving in a array the response
+        const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
+            return {
+                value: gs$cell.inputValue,
+                row: gs$cell.row
+            }
+        })
+
+        // group the response per row from Google Spreadsheets 
+        let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
+        let data = rows.map(row => row.map(element => element.value))
+
+        // set state to app ready
+        setProfiles(data)
+        setShowProfiles(data)
+        setQtdProfiles(data.length - 1)
+        setIsloading(false)
+
+    }
+
+    // Fetch data if variable isRecruiter was changed
+    useEffect(() => {
         try {
-            fetchData()
+            fetchData(urlFetchData)
         } catch (e) {
             setError(e)
         }
 
-    }, [])
+    }, [isRecruiter])
 
     return (
         <>
@@ -84,28 +132,41 @@ export default function Home() {
                     <Topbar />
                     <div className="hiring">
                         <Lottie className="lottieFile" options={hiringOptions}
-                            height={"20%"}
-                            width={"20%"}
+                            height={"60%"}
+                            width={"60%"}
                         />
                     </div>
                 </div>
+                <div className="section-profile-user">
+                    <button className="btn-profile" onClick={handlerUserchange}>{textContextButton}</button>
+                    <p className="text-alert-section">{isRecruiter ?
+                        'Você está na área reservada para que os recrutadores postem suas vagas e você que é profissional pode visualizar essas vagas e se candidatar.'
+                        : 'Você está na área reservada para os profissionais, aqui você pode cadastrar o seu perfil e os recrutadores podem visualiza-los.'
+                    }</p>
+                </div>
+
                 <Filters
                     handlerOnchange={handlerSearchOnChange}
+                    urlButton={urlForm}
+                    handlerUserchange={handlerUserchange}
+                    textButton={addButtonText}
+                    textContextButton={textContextButton}
                 />
-                {qtdProfiles &&
+                {qtdProfiles > 0 &&
                     <div className="container">
-                        <span className="profile-count" >{qtdProfiles} Perfis cadastrados</span>
+                        <span className="profile-count" >{qtdProfiles}  Cadastrados</span>
                     </div>}
                 {isloading &&
                     <div className="loading">
-                        <Lottie className="lottieFile" options={defaultOptions}
-                            height={"30%"}
-                            width={"30%"}
+                        <Lottie className="lottieFile" options={loadingOptions}
+                            height={"40%"}
+                            width={"40%"}
                         />
                     </div>
                 }
                 <div className="container" >
                     {showProfiles.length > 0 && showProfiles.map((profile, index) => {
+                        // first element form array will the Table header.
                         if (profile[0] === "Timestamp") {
                             return null
                         }
@@ -122,7 +183,6 @@ export default function Home() {
                     {showProfiles.length === 0 && !isloading && <h2>Nenhum candidato corresponde ao cargo</h2>}
                     {showProfiles.length > 0 ? <Footer /> : ''}
                 </div>
-
             </div>
         </>
     )
