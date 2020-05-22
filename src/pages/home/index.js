@@ -62,6 +62,7 @@ export default function Home() {
         event.preventDefault()
 
         setIsRecruiter(!isRecruiter)
+        setLastFetchIndex(21);
 
         // fetch data of Jobs or Professional
         if (!isRecruiter) {
@@ -72,7 +73,7 @@ export default function Home() {
             //url form for Recruiter add Jobs
             setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         } else {
-            seturlFetchData(`${baseUrl}/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full`)
+            seturlFetchData(`${baseUrl}/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full`)
             setTextContextButton('Ir para Vagas')
             setAddButtonText('Adicionar Perfil')
 
