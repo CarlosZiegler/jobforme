@@ -5,6 +5,7 @@ import Lottie from 'react-lottie';
 import Card from '../../components/card'
 import Topbar from '../../components/Topbar'
 import Filters from '../../components/Filters'
+import Pagination from '../../components/Pagination';
 
 import api from '../../services/api'
 import groupByAttribute from '../../utils/groupByAttribute'
@@ -16,17 +17,18 @@ import loadingData from '../../assets/loading.json'
 import './style.css'
 
 export default function Home() {
+    const baseUrl = 'https://spreadsheets.google.com/feeds/cells';
 
     const [profiles, setProfiles] = useState([])
     const [showProfiles, setShowProfiles] = useState([])
-    const [qtdProfiles, setQtdProfiles] = useState(null)
     const [urlForm, setUrlForm] = useState("https://forms.gle/fxWpig6SHWVhBPj26")
     const [addButtonText, setAddButtonText] = useState("Adicionar Perfil")
     const [textContextButton, setTextContextButton] = useState("Ir para Vagas")
     const [isRecruiter, setIsRecruiter] = useState(false)
-    const [urlFetchData, seturlFetchData] = useState('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
+    const [urlFetchData, seturlFetchData] = useState(`${baseUrl}/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full`)
     const [isloading, setIsloading] = useState(true)
     const [error, setError] = useState(null)
+    const [lastFetchIndex, setLastFetchIndex] = useState(21);
 
     // Configuration of LottieFiles
     const hiringOptions = {
@@ -63,14 +65,14 @@ export default function Home() {
 
         // fetch data of Jobs or Professional
         if (!isRecruiter) {
-            seturlFetchData('https://spreadsheets.google.com/feeds/cells/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full?alt=json')
+            seturlFetchData(`${baseUrl}/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full`)
             setTextContextButton('Ir para Profissionais')
             setAddButtonText('Adicionar Vaga')
 
             //url form for Recruiter add Jobs
             setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         } else {
-            seturlFetchData('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
+            seturlFetchData(`${baseUrl}/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full`)
             setTextContextButton('Ir para Vagas')
             setAddButtonText('Adicionar Perfil')
 
@@ -79,6 +81,32 @@ export default function Home() {
             setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
         }
 
+    }
+
+    /**
+     * The code below fetching prev twenty data, if exists
+    */
+    async function handlePrevPage() {
+        try {
+            await fetchData(`${urlFetchData}?alt=json&min-row=${lastFetchIndex - 39}&max-row=${lastFetchIndex - 20}`); 
+            
+            setLastFetchIndex(lastFetchIndex - 20);
+        } catch (e) {
+            setError(e)
+        }
+    }
+
+    /**
+     * The code below fetching next twenty data, if exists
+    */
+    async function handleNextPage() {
+        try {
+            await fetchData(`${urlFetchData}?alt=json&min-row=${lastFetchIndex + 1}&max-row=${lastFetchIndex + 20}`);
+
+            setLastFetchIndex(lastFetchIndex + 20);
+        } catch (e) {
+            setError(e)
+        }
     }
 
     /** 
@@ -92,35 +120,36 @@ export default function Home() {
         // get data from url
         const response = await api(dataUrl)
 
-        // saving in a array the response
-        const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
-            return {
-                value: gs$cell.inputValue,
-                row: gs$cell.row
-            }
-        })
+        if (response.feed.entry.length > 0) {
+            // saving in a array the response
+            const arrayProfile = response.feed.entry.map(({ gs$cell }) => {
+                return {
+                    value: gs$cell.inputValue,
+                    row: gs$cell.row
+                }
+            })
 
-        // group the response per row from Google Spreadsheets 
-        let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
-        let data = rows.map(row => row.map(element => element.value))
+            // group the response per row from Google Spreadsheets 
+            let rows = Object.values(groupByAttribute(arrayProfile, 'row'))
+            let data = rows.map(row => row.map(element => element.value))
 
-        // set state to app ready
-        setProfiles(data)
-        setShowProfiles(data)
-        setQtdProfiles(data.length - 1)
+            // set state to app ready
+            setProfiles(data)
+            setShowProfiles(data)
+        }
+
         setIsloading(false)
-
     }
 
     // Fetch data if variable isRecruiter was changed
     useEffect(() => {
         try {
-            fetchData(urlFetchData)
+            fetchData(`${urlFetchData}?alt=json&max-row=21`);
         } catch (e) {
             setError(e)
         }
 
-    }, [isRecruiter])
+    }, [isRecruiter, urlFetchData])
 
     return (
         <>
@@ -149,10 +178,16 @@ export default function Home() {
                     textButton={addButtonText}
                     textContextButton={textContextButton}
                 />
-                {qtdProfiles > 0 &&
-                    <div className="container">
-                        <span className="profile-count" >Cadastrados: {qtdProfiles} </span>
-                    </div>}
+
+                {profiles.length > 0 && (
+                    <Pagination
+                        id="top-pagination"
+                        handlePrevPage={handlePrevPage}
+                        handleNextPage={handleNextPage}
+                        prevButtonDisabled={lastFetchIndex === 21}
+                        nextButtonDisabled={profiles.length < 20}
+                    />
+                )}
                 {isloading &&
                     <div className="loading">
                         <Lottie className="lottieFile" options={loadingOptions}
@@ -180,6 +215,16 @@ export default function Home() {
                     {showProfiles.length === 0 && !isloading && <h2>Nenhum candidato corresponde ao cargo</h2>}
                 </div>
             </div>
+
+            {profiles.length > 0 && (
+                <Pagination
+                    id="bottom-pagination"
+                    handlePrevPage={handlePrevPage}
+                    handleNextPage={handleNextPage}
+                    prevButtonDisabled={lastFetchIndex === 21}
+                    nextButtonDisabled={profiles.length < 20}
+                />
+            )}
         </>
     )
 }
