@@ -73,10 +73,8 @@ export default function Home() {
             seturlFetchData('https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json')
             setTextContextButton('Ir para Vagas')
             setAddButtonText('Adicionar Perfil')
-
-
             //url form for Professional add Profile
-            setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9')
+            setUrlForm('https://forms.gle/fxWpig6SHWVhBPj26')
         }
 
     }
