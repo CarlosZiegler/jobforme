@@ -1,9 +1,9 @@
 import React from 'react'
 
-import linkIcon from '../../assets/link.svg'
-import linkedinIcon from '../../assets/linkedin.svg'
-import houseIcon from '../../assets/house.svg'
-import emailIcon from '../../assets/email.svg'
+import linkIcon from 'assets/link.svg'
+import linkedinIcon from 'assets/linkedin.svg'
+import houseIcon from 'assets/house.svg'
+import emailIcon from 'assets/email.svg'
 
 import './style.css'
 

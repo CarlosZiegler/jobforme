@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Lottie from 'react-lottie';
 
 
-import Card from '../../components/card'
-import Topbar from '../../components/Topbar'
-import Filters from '../../components/Filters'
+import Card from 'components/card'
+import Topbar from 'components/Topbar'
+import Filters from 'components/Filters'
 
-import api from '../../services/api'
-import groupByAttribute from '../../utils/groupByAttribute'
-import searchData from '../../utils/searchData'
+import api from 'services/api'
+import groupByAttribute from 'utils/groupByAttribute'
+import searchData from 'utils/searchData'
 
-import hiringData from '../../assets/15563-hiring-isometric-animation (1).json'
-import loadingData from '../../assets/loading.json'
+import hiringData from 'assets/15563-hiring-isometric-animation (1).json'
+import loadingData from 'assets/loading.json'
 
 import './style.css'
 
