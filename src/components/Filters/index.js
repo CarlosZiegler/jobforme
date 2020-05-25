@@ -3,8 +3,6 @@ import React from 'react';
 import FindInput from './FindInput'
 
 
-import './style.css'
-
 function Filters(props) {
 
 	const { handlerOnchange, urlButton, textButton } = props

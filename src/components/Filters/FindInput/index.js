@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.css'
+
 
 function FindInput(props) {
 	const { placeholder, handlerOnchange } = props
