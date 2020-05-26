@@ -1,5 +1,5 @@
 {
   "singleQuote": true,
   "trailingComma": "es5",
-  "tabWidth": "tab",
+  "tabWidth": 2
 }
