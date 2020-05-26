@@ -1,16 +1,32 @@
 {
-  "name": "learn-starter",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "9.3.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-lottie": "^1.2.3"
-  }
+	"name": "learn-starter",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"fix": "eslint . --ext .js --fix"
+	},
+	"dependencies": {
+		"next": "9.3.5",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"react-lottie": "^1.2.3"
+	},
+	"devDependencies": {
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.1.0",
+		"eslint-config-airbnb": "^18.1.0",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-react": "^7.20.0",
+		"eslint-plugin-react-hooks": "^4.0.2"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"airbnb"
+		]
+	}
 }

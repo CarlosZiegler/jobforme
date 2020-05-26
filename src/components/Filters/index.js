@@ -1,11 +1,10 @@
 import React from 'react';
 
-import FindInput from './FindInput'
+import FindInput from './FindInput';
 
 
 function Filters(props) {
-
-	const { handlerOnchange, urlButton, textButton } = props
+	const { handlerOnchange, urlButton, textButton } = props;
 	return (
 
 		<div className="container" data-testid="filters">
@@ -15,7 +14,6 @@ function Filters(props) {
 			</section>
 		</div>
 	);
-
 }
 
 export default Filters;
