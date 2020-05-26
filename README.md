@@ -67,6 +67,15 @@ Para fazer o push do repositório:
 
 `git push origin master`
 
+### Iniciando:
+Certifique-se de estar na pasta raíz do projeto
+
+```ỳarn install```
+
+```yarn dev``` - nextjs local
+
+```yarn fix```- ESLint
+
 ## :pencil: Autores
 
 | [<img src="https://avatars2.githubusercontent.com/u/38855507?s=400&u=20c80252e57c06227186be9761e67a20a82d3717&v=4" width=115><br><sub>Carlos Ziegler</sub>](https://github.com/carlosziegler) | [<img src="https://avatars2.githubusercontent.com/u/51891656?s=400&v=4" width=115><br><sub>Igor Rebolla</sub>](https://github.com/igoralexandre80) |
@@ -74,8 +83,8 @@ Para fazer o push do repositório:
 
 ## Colaboradores
 
-| [<img src="https://avatars2.githubusercontent.com/u/51726945?s=460&u=d5955a541dbd8ec498acdfb669fbb81e531ee04c&v=4" width=115><br><sub>Vitor Serrano</sub>](https://github.com/vitorserrano) | [<img src="https://avatars1.githubusercontent.com/u/62717182?s=460&u=8e6ce60a919b679d811b7bae6d6f457514b79546&v=4" width=115><br><sub>Lucas Felinto</sub>](https://github.com/lucas-felinto) |
-| :---: | :---: |
+| [<img src="https://avatars2.githubusercontent.com/u/51726945?s=460&u=d5955a541dbd8ec498acdfb669fbb81e531ee04c&v=4" width=115><br><sub>Vitor Serrano</sub>](https://github.com/vitorserrano) | [<img src="https://avatars1.githubusercontent.com/u/62717182?s=460&u=8e6ce60a919b679d811b7bae6d6f457514b79546&v=4" width=115><br><sub>Lucas Felinto</sub>](https://github.com/lucas-felinto) | [<img src="https://avatars2.githubusercontent.com/u/13542718?s=460&u=302bcf50561d12fad5f8eaee1d674220cc92f4c1&v=4" width=115><br><sub>Rafael Maia</sub>](https://github.com/rafaelmaiach) | [<img src="https://avatars1.githubusercontent.com/u/58220450?s=460&u=e035b2bd9ea515c67be2e820e58d807aaa1ec254&v=4" width=115><br><sub>Idenilson Santos</sub>](https://github.com/IdenilsonSantos) | [<img src="https://avatars0.githubusercontent.com/u/32375682?s=460&u=4d975e446d9209ef9565a57a604b34e2329ddd62&v=4" width=115><br><sub>David Elias</sub>](https://github.com/CenourinhaBR) | [<img src="https://avatars0.githubusercontent.com/u/45761443?s=460&u=87afd14fad08ea27bd64ffcfe8deb2322b8be6f5&v=4" width=115><br><sub>Lucas Pinheiro</sub>](https://github.com/lucaspinheirogit) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 
 ## Licença
 
