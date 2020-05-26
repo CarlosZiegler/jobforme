@@ -1,9 +1,5 @@
 import React from 'react';
 
-import './style.css'
-
-
-
 function Topbar() {
 
 	return (<header data-testid="topbar" className="topbar">
