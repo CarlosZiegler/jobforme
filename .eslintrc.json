@@ -1,44 +1,44 @@
 {
-	"env": {
-		"browser": true,
-		"es6": true,
-		"node": true,
-		"jest": true
-	},
-	"parser": "babel-eslint",
-	"extends": [
-		"airbnb",
-		"plugin:react/recommended",
-		"eslint:recommended"
-	],
-	"parserOptions": {
-		"ecmaFeatures": {
-			"jsx": true
-		},
-		"ecmaVersion": 2018,
-		"sourceType": "module"
-	},
-	"plugins": [
-		"react"
-	],
-	"rules": {
-		"react/react-in-jsx-scope": "off",
-		"import/prefer-default-export": "off",
-		"react/jsx-filename-extension": [
-			1,
-			{
-				"extensions": [
-					".js",
-					".jsx"
-				]
-			}
-		],
-		"react/prop-types": 0,
-		"react/jsx-indent": "off",
-		"indent": [
-			2,
-			"tab"
-		],
-		"no-tabs": 0
-	}
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "plugin:react/recommended", "eslint:recommended"],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@assets", "./src/assets"],
+          ["@components", "./src/components"],
+          ["@services", "./src/services"],
+          ["@styles", "./styles"],
+          ["@utils", "./src/utils"]
+        ]
+      }
+    }
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/prop-types": 0,
+    "react/jsx-indent": "off",
+    "indent": [2, 2]
+  }
 }
