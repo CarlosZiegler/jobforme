@@ -6,8 +6,8 @@ function Card(props) {
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-name">{name}</h3>
-        <p className="card-position">{cargo}</p>
+        <h3 className="card-name">{cargo}</h3>
+        <p className="card-position">{name}</p>
       </div>
       <div className="card-body">
         <p className="contact-info lowercase">
