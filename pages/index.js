@@ -8,7 +8,9 @@ import loadingData from '@assets/loading.json';
 import Topbar from '@components/Topbar';
 import Card from '@components/card';
 import Filters from '@components/Filters';
-import api from '@services/api';
+import { PrimaryButton } from '@components/Buttons';
+import Layout from '@components/Layout';
+import api from '@services/Api';
 import groupByAttribute from '@utils/groupByAttribute';
 import searchData from '@utils/searchData';
 
@@ -43,7 +45,7 @@ export default function Home() {
   /**
    * The code below will find the Job position
    */
-  const handlerSearchOnChange = async (event) => {
+  const handlerSearchOnChange = async event => {
     const result = searchData(profiles, event.target.value);
     setShowProfiles(result);
   };
@@ -52,9 +54,7 @@ export default function Home() {
    * The code below will set State of App
    * Recruiter can be added Jobs and Users can be added Profiles
    */
-  const handlerUserchange = async (event) => {
-    event.preventDefault();
-
+  const handlerUserchange = async () => {
     setIsRecruiter(!isRecruiter);
 
     // fetch data of Jobs or Professional
@@ -97,7 +97,7 @@ export default function Home() {
 
     // group the response per row from Google Spreadsheets
     const rows = Object.values(groupByAttribute(arrayProfile, 'row'));
-    const data = rows.map((row) => row.map((element) => element.value));
+    const data = rows.map(row => row.map(element => element.value));
 
     // set state to app ready
     setProfiles(data);
@@ -116,69 +116,64 @@ export default function Home() {
   }, [isRecruiter]);
 
   return (
-    <>
-      <div>
-        <div className="header-page">
-          <Topbar />
-          <div className="hiring">
-            <Lottie className="lottieFile" options={hiringOptions} height="60%" width="60%" />
-          </div>
-        </div>
-        <div className="section-profile-user">
-          <button type="button" className="btn-profile" onClick={handlerUserchange}>
-            {textContextButton}
-          </button>
-          <p className="text-alert-section">
-            {isRecruiter
-              ? 'Você está na área reservada para que os recrutadores postem suas vagas e você que é profissional pode visualizar essas vagas e se candidatar.'
-              : 'Você está na área reservada para os profissionais, aqui você pode cadastrar o seu perfil e os recrutadores podem visualiza-los.'}
-          </p>
-        </div>
-
-        <Filters
-          handlerOnchange={handlerSearchOnChange}
-          urlButton={urlForm}
-          handlerUserchange={handlerUserchange}
-          textButton={addButtonText}
-          textContextButton={textContextButton}
-        />
-        {qtdProfiles > 0 && (
-          <div className="container">
-            <span className="profile-count">
-              Cadastrados:
-              {qtdProfiles}
-            </span>
-          </div>
-        )}
-        {isloading && (
-          <div className="loading">
-            <Lottie className="lottieFile" options={loadingOptions} height="100%" width="100%" />
-          </div>
-        )}
-        <div className="container">
-          {showProfiles.length > 0
-            && showProfiles.map((profile, index) => {
-              // first element form array will the Table header.
-              if (profile[0] === 'Timestamp') {
-                return null;
-              }
-              return (
-                <Card
-                  key={index}
-                  className="profile"
-                  name={profile[2]}
-                  cargo={profile[3]}
-                  linkedin={profile[4]}
-                  email={profile[1]}
-                  cidade={profile[5]}
-                />
-              );
-            })}
-          {showProfiles.length === 0 && !isloading && (
-            <h2>Nenhum candidato corresponde ao cargo</h2>
-          )}
+    <Layout>
+      <div className="header-page">
+        <Topbar />
+        <div className="hiring">
+          <Lottie className="lottieFile" options={hiringOptions} height="100%" width="100%" />
         </div>
       </div>
-    </>
+
+      <div className="section-profile-user">
+        <PrimaryButton value={textContextButton} onClick={handlerUserchange} />
+        <p className="text-alert-section">
+          {isRecruiter
+            ? 'Você está na área reservada para que os recrutadores postem suas vagas e você que é profissional pode visualizar essas vagas e se candidatar.'
+            : 'Você está na área reservada para os profissionais, aqui você pode cadastrar o seu perfil e os recrutadores podem visualiza-los.'}
+        </p>
+      </div>
+
+      <Filters
+        handlerOnchange={handlerSearchOnChange}
+        urlButton={urlForm}
+        handlerUserchange={handlerUserchange}
+        textButton={addButtonText}
+        textContextButton={textContextButton}
+      />
+      {qtdProfiles > 0 && (
+        <div className="container">
+          <span className="profile-count">
+            Cadastrados:
+            {qtdProfiles}
+          </span>
+        </div>
+      )}
+      {isloading && (
+        <div className="loading">
+          <Lottie className="lottieFile" options={loadingOptions} height="100%" width="100%" />
+        </div>
+      )}
+      <div className="container">
+        {showProfiles.length > 0
+          && showProfiles.map((profile, index) => {
+            // first element form array will the Table header.
+            if (profile[0] === 'Timestamp') {
+              return null;
+            }
+            return (
+              <Card
+                key={index}
+                className="profile"
+                name={profile[2]}
+                cargo={profile[3]}
+                linkedin={profile[4]}
+                email={profile[1]}
+                cidade={profile[5]}
+              />
+            );
+          })}
+        {showProfiles.length === 0 && !isloading && <h2>Nenhum candidato corresponde ao cargo</h2>}
+      </div>
+    </Layout>
   );
 }

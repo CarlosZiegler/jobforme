@@ -30,6 +30,7 @@
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "react/jsx-filename-extension": [
       1,
@@ -39,6 +40,8 @@
     ],
     "react/prop-types": 0,
     "react/jsx-indent": "off",
-    "indent": [2, 2]
+    "indent": [2, 2],
+    "arrow-parens": "off",
+    "object-curly-newline": "off"
   }
 }
