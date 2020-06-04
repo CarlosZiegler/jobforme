@@ -9,12 +9,15 @@
 		"fix": "eslint . --ext .js --fix"
 	},
 	"dependencies": {
+		"dotenv": "^8.2.0",
+		"firebase": "^7.14.6",
 		"next": "9.4.2",
 		"react": "16.13.1",
 		"react-dom": "16.13.1",
 		"react-ga": "^2.7.0",
 		"react-lottie": "^1.2.3",
-		"styled-components": "^5.1.1"
+		"styled-components": "^5.1.1",
+		"webpack": "^4.43.0"
 	},
 	"devDependencies": {
 		"babel-eslint": "^10.1.0",
