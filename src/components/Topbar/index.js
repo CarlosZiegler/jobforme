@@ -1,20 +1,26 @@
 import React from 'react';
 import { UserContext } from '../../services/Providers/UserProvider';
-
+import * as Styles from './styles';
 
 function Topbar() {
   const user = React.useContext(UserContext);
   return (
-    <header data-testid="topbar" className="topbar">
-      <div className="container">
-        <a href="/" className="topbar__logo">
-          <h1>#Jobforme</h1>
-        </a>
-        {user
-          ? <a href="/Login">Painel</a>
-          : <a href="/Login">Login</a>}
-      </div>
-    </header>
+    <Styles.TopNav>
+      <Styles.Container>
+        <div className="logo">
+          <a href="/">
+            <h1>JobForMe</h1>
+          </a>
+        </div>
+        <div className="menu">
+          {user
+            ? <a href="/Login">PAINEL</a>
+            : (<a href="/Login">ENTRAR</a>)}
+        </div>
+
+      </Styles.Container>
+    </Styles.TopNav>
+
   );
 }
 

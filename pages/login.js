@@ -1,6 +1,14 @@
+import Topbar from '@components/Topbar';
+import Layout from '@components/Layout';
 
 function Login() {
-  return <h1>Login</h1>;
+  return (
+    <Layout>
+
+      <Topbar />
+      <h1>Login</h1>
+    </Layout>
+  );
 }
 
 export default Login;
