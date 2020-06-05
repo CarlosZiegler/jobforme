@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable consistent-return */
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -25,10 +27,10 @@ export const generateUserDocument = async (user, additionalData) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
-    const { email, name, photoURL } = user;
+    const { email, photoURL, displayName } = user;
     try {
       await userRef.set({
-        name,
+        name: displayName,
         email,
         photoURL,
         nivel: 0,

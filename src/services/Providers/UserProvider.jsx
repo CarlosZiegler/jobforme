@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component, createContext } from 'react';
 import { auth, generateUserDocument } from '../FireBase';
 
