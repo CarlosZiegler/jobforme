@@ -2,9 +2,12 @@
 import styled from 'styled-components';
 
 export const Base = styled.div`
-  background: url(${require('../src/assets/images/base.jpg')}) no-repeat center center fixed;
+ /*
+ background: url(${require('../src/assets/images/base.jpg')}) no-repeat center center fixed;
+ background-size: cover;
+  */
   width: 100%;
-  background-size: cover;
+  background: #3498db;
   height: 100vh;
 `;
 

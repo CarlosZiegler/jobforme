@@ -12,6 +12,7 @@ body {
     text-rendering: optimizeLegibility !important;
     height: 100%;
     width: 100%;
+    background: #ededed;
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -110,29 +111,33 @@ body {
     justify-content: center;
     align-items: center;
     margin: 5px;
-    border: 1px solid rgb(130, 130, 130);
     width: 350px;
     text-align: center;
-    border-radius: 15px;
+    border-radius: 5px;
+    padding: 1.5rem 1rem;
+    background: #fff;
 }
 
 .card-header {
     width: 80%;
-    border-bottom: 1px solid black;
     margin: 5px;
     text-transform: capitalize;
 }
 
 .card-name {
-    font-weight: bold;
+    font-weight: 100;
+    font-size: 1.1rem;
     text-transform: capitalize;
+    margin-bottom: 5px;
 }
 
 .card-position {
     text-align: center;
     border-radius: 5px;
-    background: rgb(222, 222, 222);
-    padding: 5px;
+    background: #3498db;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 8px;
 }
 
 .card-body {
@@ -149,6 +154,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.linkedin a {
+    font-size: 2rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.linkedin a:hover {
+    background: none;
+}
+
+.linkedin a>svg {
+    color: #444;
+}
+
+.linkedin a>svg:hover {
+    color: #3498db;
 }
 
 .lowercase {

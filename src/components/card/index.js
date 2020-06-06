@@ -1,4 +1,6 @@
 import React from 'react';
+import { FiMapPin, FiMail } from 'react-icons/fi';
+import { FaLinkedin } from 'react-icons/fa';
 
 function Card(props) {
   const { name, cargo, linkedin, email, cidade } = props;
@@ -6,27 +8,30 @@ function Card(props) {
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-name">{cargo}</h3>
-        <p className="card-position">{name}</p>
+        <h3 className="card-name">{name}</h3>
+
+        <p className="card-position">{cargo}</p>
+
       </div>
       <div className="card-body">
-        <p className="contact-info lowercase">
+        <p className="contact-info lowercase linkedin">
           <a href={linkedin} target="_blank" rel="noopener noreferrer">
-            <img
-              className="link icon"
-              src={linkedin?.includes('linkedin') ? '/linkedin.svg' : '/link.svg'}
-              alt="Linkedin Icon"
-            />
+            <FaLinkedin />
+            {' '}
+
           </a>
-        </p>
-        <p className="contact-info lowercase">
-          <img className="icon" src="/email.svg" alt="email Icon" />
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        <p className="contact-info">
-          <img className="icon" src="/house.svg" alt="house Icon" />
+          <FiMapPin />
+          {' '}
+          {' '}
           {cidade}
         </p>
+        <p className="contact-info lowercase">
+          <FiMail />
+          {' '}
+          {' '}
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+        <p className="contact-info" />
       </div>
     </div>
   );
