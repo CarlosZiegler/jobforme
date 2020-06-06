@@ -6,6 +6,7 @@ import Topbar from '@components/Topbar';
 import Layout from '@components/Layout';
 import { auth, generateUserDocument } from '@services/FireBase';
 import Router from 'next/router';
+import * as Styles from '@styles/login';
 import { UserContext } from '../src/services/Providers/UserProvider';
 
 function Cadastrar() {
@@ -13,7 +14,7 @@ function Cadastrar() {
 
   React.useEffect(() => {
     if (userl != null) {
-      Router.push('/Dashboard');
+      Router.push('/dashboard');
     }
   }, [userl]);
 
@@ -28,28 +29,37 @@ function Cadastrar() {
     password,
   ) => {
     event.preventDefault();
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      generateUserDocument(user, { displayName: name });
-    } catch (error) {
-      // setError('Error Signing up with email and password', error.code);
-      if (error.code === 'auth/invalid-email') {
-        setError('Email inválido !');
-      } else if (error.code === 'auth/weak-password') {
-        setError('Senha deve ter no mínimo 6 caracteres !');
-      } else if (error.code === 'auth/email-already-in-use') {
-        setError('Email já cadastrado !');
-      } else {
-        setError(error.message);
-      }
-    }
 
-    setEmail('');
-    setPassword('');
-    setName('');
+    if (email.length < 1) {
+      setError('Campo do email vazio !');
+    } else if (password.length < 1) {
+      setError('Campo da senha vazio !');
+    } else if (name.length < 1) {
+      setError('Campo da nome vazio !');
+    } else {
+      try {
+        const { user } = await auth.createUserWithEmailAndPassword(
+          email,
+          password,
+        );
+        generateUserDocument(user, { displayName: name });
+      } catch (error) {
+      // setError('Error Signing up with email and password', error.code);
+        if (error.code === 'auth/invalid-email') {
+          setError('Email inválido !');
+        } else if (error.code === 'auth/weak-password') {
+          setError('Senha deve ter no mínimo 6 caracteres !');
+        } else if (error.code === 'auth/email-already-in-use') {
+          setError('Email já cadastrado !');
+        } else {
+          setError(error.message);
+        }
+      }
+
+      setEmail('');
+      setPassword('');
+      setName('');
+    }
   };
 
   const onChangeHandler = (event) => {
@@ -66,72 +76,83 @@ function Cadastrar() {
   return (
     <Layout>
       <Topbar />
-      <div>
-        <h2>Cadastrar</h2>
-        <p>
+      <Styles.Base>
+
+
+        <Styles.Container>
+          <Styles.Box>
+
+            <h2>Cadastrar</h2>
+            <p>
         Preencha o formulário abaixo para se inscrever. Já se inscreveu? Então apenas
-          <a href="/login">Entre</a>
-        </p>
+              <a href="/login">Entre</a>
+            </p>
 
-        <form>
-          {error ? <p>{error}</p> : null}
-          <div>
-            <input
-              type="text"
-
-              name="displayName"
-              value={name}
-              id="displayName"
-              onChange={(event) => onChangeHandler(event)}
-              required
-            />
-            <label htmlFor="displayName">
+            <form>
+              {error ? <p className="error">{error}</p> : null}
+              <div>
+                <label htmlFor="displayName">
                     Nome
-            </label>
-          </div>
-          <div>
-            <input
-              type="email"
+                </label>
+                <input
+                  type="text"
+                  placeholder="Seu nome"
+                  name="displayName"
+                  value={name}
+                  id="displayName"
+                  onChange={(event) => onChangeHandler(event)}
+                  required
+                />
 
-              name="userEmail"
-              value={email}
-              id="userEmail"
-              onChange={(event) => onChangeHandler(event)}
-              required
-            />
-            <label htmlFor="userEmail">
+              </div>
+              <div>
+                <label htmlFor="userEmail">
                     Email
-            </label>
-          </div>
-          <div>
-            <input
-              type="password"
+                </label>
+                <input
+                  type="email"
+                  placeholder="Seu email"
+                  name="userEmail"
+                  value={email}
+                  id="userEmail"
+                  onChange={(event) => onChangeHandler(event)}
+                  required
+                />
 
-              name="userPassword"
-              value={password}
-              id="userPassword"
-              onChange={(event) => onChangeHandler(event)}
-              required
-            />
-            <label htmlFor="userPassword">
+              </div>
+              <div>
+                <label htmlFor="userPassword">
                     Senha
-            </label>
-          </div>
-          <div>
-            <button
-              onClick={(event) => {
-                createUserWithEmailAndPasswordHandler(
-                  event,
-                  email,
-                  password,
-                );
-              }}
-            >
+                </label>
+                <input
+                  type="password"
+                  placeholder="******"
+                  name="userPassword"
+                  value={password}
+                  id="userPassword"
+                  onChange={(event) => onChangeHandler(event)}
+                  required
+                />
+
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  onClick={(event) => {
+                    createUserWithEmailAndPasswordHandler(
+                      event,
+                      email,
+                      password,
+                    );
+                  }}
+                >
               Cadastrar
-            </button>
-          </div>
-        </form>
-      </div>
+                </button>
+              </div>
+            </form>
+          </Styles.Box>
+        </Styles.Container>
+      </Styles.Base>
     </Layout>
   );
 }

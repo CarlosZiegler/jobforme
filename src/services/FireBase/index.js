@@ -22,6 +22,14 @@ if (!firebase.apps.length) {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+/**
+ *
+ * Regras nivel
+ * 0 - user
+ * 1 - Recruter
+ * 2 - Admin
+ */
+
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);

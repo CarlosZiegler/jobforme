@@ -14,8 +14,8 @@ function Topbar() {
         </div>
         <div className="menu">
           {user
-            ? <a href="/Dashboard">PAINEL</a>
-            : (<a href="/Login">ENTRAR</a>)}
+            ? <a href="/dashboard">PAINEL</a>
+            : (<a href="/login">ENTRAR</a>)}
         </div>
 
       </Styles.Container>

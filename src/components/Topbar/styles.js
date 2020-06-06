@@ -32,6 +32,7 @@ export const Container = styled.div`
       border-radius: 2rem;
       padding: 0.6rem 1.2rem;
       color: #FFF;
+      cursor: pointer;
 
       &:hover {
         background: #1457d4;
