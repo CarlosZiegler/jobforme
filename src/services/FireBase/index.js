@@ -23,10 +23,9 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 /**
- *
- * Regras nivel
+ * Role
  * 0 - user
- * 1 - Recruter
+ * 1 - Recruiter
  * 2 - Admin
  */
 
@@ -41,11 +40,11 @@ export const generateUserDocument = async (user, additionalData) => {
         name: displayName,
         email,
         photoURL,
-        nivel: 0,
+        role: 0,
+        createdAt: new Date().getUTCDate(),
         ...additionalData,
       });
     } catch (error) {
-      // console.error('Error creating user document', error);
       return;
     }
   }
@@ -59,6 +58,25 @@ const getUserDocument = async uid => {
       uid,
       ...userDocument.data(),
     };
+  } catch (error) {
+    // console.error('Error fetching user', error);
+    return null;
+  }
+};
+export const getAllUsers = async () => {
+  const users = [];
+  try {
+    await firestore.collection('users')
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          users.push(doc.data());
+        });
+      })
+      .catch(err => {
+        alert('Error getting documents', err);
+      });
+    return users;
   } catch (error) {
     // console.error('Error fetching user', error);
     return null;

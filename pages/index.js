@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-indent-props */
 import React, { useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
-import router from 'next/router';
 import hiringData from '@assets/15563-hiring-isometric-animation (1).json';
 import loadingData from '@assets/loading.json';
 import Topbar from '@components/Topbar';

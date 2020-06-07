@@ -14,22 +14,21 @@ function Card(props) {
 
       </div>
       <div className="card-body">
-        <p className="contact-info lowercase linkedin">
+        <div className="contact-info lowercase linkedin">
           <a href={linkedin} target="_blank" rel="noopener noreferrer">
-            <FaLinkedin />
-            {' '}
-
+            <FaLinkedin className="icon" />
           </a>
-          <FiMapPin />
-          {' '}
-          {' '}
-          {cidade}
-        </p>
+          <p className="contact-info_city">
+            <FiMapPin className="icon" />
+            {cidade}
+          </p>
+
+        </div>
         <p className="contact-info lowercase">
-          <FiMail />
-          {' '}
-          {' '}
-          <a href={`mailto:${email}`}>{email}</a>
+          <a href={`mailto:${email}`}>
+            <FiMail className="icon" />
+            {email}
+          </a>
         </p>
         <p className="contact-info" />
       </div>

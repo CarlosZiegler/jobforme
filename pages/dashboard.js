@@ -1,29 +1,54 @@
 /* eslint-disable react/button-has-type */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Topbar from '@components/Topbar';
 import Layout from '@components/Layout';
-import { auth } from '@services/FireBase';
+import Card from '@components/card';
+import { auth, getAllUsers } from '@services/FireBase';
 import Router from 'next/router';
 import * as Styles from '@styles/dashboard';
 import { FiArrowLeft } from 'react-icons/fi';
-import { UserContext } from '../src/services/Providers/UserProvider';
+import { UserContext } from '@services/Providers/UserProvider';
+
 
 function Dashboard() {
+  const [allUsers, setallUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchDataFromFirebase = async () => {
+      const result = await getAllUsers();
+      console.log(result);
+      return setallUsers(result);
+    };
+    fetchDataFromFirebase();
+  }, []);
+
+
   const user = useContext(UserContext);
   React.useEffect(() => {
     if (user === null) {
       Router.push('/login');
     }
   }, [user]);
-  return (
 
+
+  return (
     <Layout>
-      {user ? (
+      {user && allUsers ? (
         <>
           <Topbar />
-          <Painel user={user} />
+          {allUsers && allUsers.map(({ displayName, jobPosition, linkedin, email, city }) => (
+            <Card
+              key={displayName}
+              className="profile"
+              name={displayName}
+              cargo={jobPosition}
+              linkedin={linkedin}
+              email={email}
+              cidade={city}
+            />
+          ))}
         </>
-      ) : null }
+      ) : null}
 
     </Layout>
   );
@@ -47,7 +72,7 @@ Sair
         </Styles.Button>
         <Styles.Intro>
           <h1>
-Bem vindo
+            Bem vindo
             {' '}
             {name}
             {' '}

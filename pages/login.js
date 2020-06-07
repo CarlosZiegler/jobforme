@@ -7,7 +7,7 @@ import Layout from '@components/Layout';
 import { auth } from '@services/FireBase';
 import Router from 'next/router';
 import * as Styles from '@styles/login';
-import { UserContext } from '../src/services/Providers/UserProvider';
+import { UserContext } from '@services/Providers/UserProvider';
 
 function Login() {
   const user = useContext(UserContext);
@@ -60,17 +60,13 @@ function Login() {
     <Layout>
       <Topbar />
       <Styles.Base>
-
-
         <Styles.Container>
           <Styles.Box>
-
-
             <h2>Entrar</h2>
             <p>
-          Não tem cadastro ? Então
+              Não tem cadastro ? Então
               {' '}
-              <a href="/cadastrar">Cadastra-se aqui</a>
+              <a href="/signup">Cadastra-se aqui</a>
             </p>
 
             <form>
@@ -106,7 +102,7 @@ function Login() {
                     signInWithEmailAndPasswordHandler(event, email, password);
                   }}
                 >
-              Entrar
+                  Entrar
                 </button>
               </div>
             </form>

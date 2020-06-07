@@ -152,8 +152,12 @@ body {
 
 .contact-info {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.contact-info_city{
+  text-transform: Capitalize;
 }
 
 .linkedin a {
@@ -234,6 +238,7 @@ h1 {
 }
 
 .text-alert-section {
+  margin-top: 5px;
     display: flex;
     padding: 6px 16px;
     font-size: 0.875rem;
@@ -245,3 +250,4 @@ h1 {
     background-color: #ff9800;
     text-align: center;
 }
+

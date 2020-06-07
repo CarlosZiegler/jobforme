@@ -25,7 +25,7 @@ export const logPageView = () => {
 export const initGA = () => {
   const environment = process.env.NODE_ENV;
   const isProduction = environment === 'production';
-  const trackingCode = isProduction ? 'UA-104941775-4' : 'UA-000000-01';
+  const trackingCode = isProduction ? process.env.GOOLGE_ANALYTICS : 'UA-000000-01';
 
   ReactGA.initialize(trackingCode, { debug: !isProduction });
 };

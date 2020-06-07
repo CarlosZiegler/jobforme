@@ -2,10 +2,6 @@
 import styled from 'styled-components';
 
 export const Base = styled.div`
- /*
- background: url(${require('../src/assets/images/base.jpg')}) no-repeat center center fixed;
- background-size: cover;
-  */
   width: 100%;
   background: #3498db;
   height: 100vh;
@@ -23,7 +19,7 @@ export const Box = styled.div`
   width:  100%;
   max-width: 400px;
   margin: auto;
-  margin-top: 15%;
+  margin-top: 5%;
   color: #000;
   background: #fff;
   padding: 4%;
@@ -69,6 +65,24 @@ export const Box = styled.div`
       margin-top: 10px;
       cursor: pointer;
     }
+
+    .region-info{
+      display:flex;
+      max-width:100%;
+      margin:5px 0;
+    }
+    .region-item:last-child{
+      width:100%;
+      margin-left: 15px;
+    }
+    .selector-dropdown{
+      width: 100%;
+      height:2rem;
+    }
+    .text-login{
+      margin-top:15px;
+      text-align:center;
+    }
   }
 
   .error {
@@ -77,5 +91,6 @@ export const Box = styled.div`
      color: #fff;
      margin-bottom: 5px;
   }
+
 
 `;
