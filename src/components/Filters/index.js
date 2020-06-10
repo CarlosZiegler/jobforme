@@ -10,7 +10,8 @@ function Filters(props) {
     <div className="container" data-testid="filters">
       <section className="filters">
         <FindInput handlerOnchange={handlerOnchange} placeholder="Pesquisar" />
-        <LinkButton href={urlButton} target="_blank" value={textButton} />
+        {urlButton && <LinkButton href={urlButton} target="_blank" value={textButton} />}
+
       </section>
     </div>
   );

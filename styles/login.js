@@ -64,6 +64,7 @@ export const Box = styled.div`
       font-size: 1.2rem;
       margin-top: 10px;
       cursor: pointer;
+      border-radius:10px;
     }
 
     .region-info{

@@ -12,6 +12,8 @@ import Layout from '@components/Layout';
 import api from '@services/Api';
 import groupByAttribute from '@utils/groupByAttribute';
 import searchData from '@utils/searchData';
+import Router from 'next/router';
+import { auth } from '@services/FireBase';
 
 
 export default function Home() {
@@ -26,7 +28,6 @@ export default function Home() {
     'https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json',
   );
   const [isloading, setIsloading] = useState(true);
-  const [error, setError] = useState(null);
 
   // Configuration of LottieFiles
   const hiringOptions = {
@@ -111,14 +112,23 @@ export default function Home() {
     try {
       fetchData(urlFetchData);
     } catch (e) {
-      setError(e);
+      console.log(e);
     }
   }, [isRecruiter]);
+
+  const Logout = () => {
+    if (auth) {
+      auth.signOut().then(() => {
+        Router.push('/login');
+      });
+    }
+    Router.push('/login');
+  };
 
   return (
     <Layout>
       <div className="header-page">
-        <Topbar />
+        <Topbar functionTopbar={Logout} />
         <div className="hiring">
           <Lottie className="lottieFile" options={hiringOptions} height="100%" width="100%" />
         </div>

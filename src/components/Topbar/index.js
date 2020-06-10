@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { UserContext } from '../../services/Providers/UserProvider';
 import * as Styles from './styles';
 
-function Topbar() {
+function Topbar(props) {
+  const { functionTopbar } = props;
   const user = React.useContext(UserContext);
   return (
     <Styles.TopNav>
@@ -14,13 +17,11 @@ function Topbar() {
         </div>
         <div className="menu">
           {user
-            ? <a href="/dashboard">PAINEL</a>
-            : (<a href="/login">ENTRAR</a>)}
+            ? <span className="topbar-button" onClick={() => functionTopbar()}>Logout</span>
+            : (<a href="/login">Login</a>)}
         </div>
-
       </Styles.Container>
     </Styles.TopNav>
-
   );
 }
 

@@ -41,7 +41,8 @@ export const generateUserDocument = async (user, additionalData) => {
         email,
         photoURL,
         role: 0,
-        createdAt: new Date().getUTCDate(),
+        createdAt: new Date(),
+        isActive: true,
         ...additionalData,
       });
     } catch (error) {
@@ -50,7 +51,7 @@ export const generateUserDocument = async (user, additionalData) => {
   }
   return getUserDocument(user.uid);
 };
-const getUserDocument = async uid => {
+export const getUserDocument = async uid => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();
@@ -58,6 +59,29 @@ const getUserDocument = async uid => {
       uid,
       ...userDocument.data(),
     };
+  } catch (error) {
+    // console.error('Error fetching user', error);
+    return null;
+  }
+};
+export const updateUserDocument = async ({ uid }, { displayName,
+  jobPosition,
+  country,
+  region,
+  city,
+  linkedin }) => {
+  if (!uid) return null;
+  try {
+    const userRef = firestore.doc(`users/${uid}`);
+    const updateSingle = userRef.update({
+      displayName,
+      jobPosition,
+      country,
+      region,
+      city,
+      linkedin,
+    });
+    return updateSingle;
   } catch (error) {
     // console.error('Error fetching user', error);
     return null;
@@ -74,9 +98,31 @@ export const getAllUsers = async () => {
         });
       })
       .catch(err => {
-        alert('Error getting documents', err);
+        // alert('Erro Inesperado', err);
+        // Router.push('/login');
       });
     return users;
+  } catch (error) {
+    // console.error('Error fetching user', error);
+    return null;
+  }
+};
+
+export const getAllJobs = async () => {
+  const jobs = [];
+  try {
+    await firestore.collection('jobs')
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          jobs.push(doc.data());
+        });
+      })
+      .catch(err => {
+        alert('Erro Inesperado', err);
+        // Router.push('/login');
+      });
+    return jobs;
   } catch (error) {
     // console.error('Error fetching user', error);
     return null;

@@ -4,6 +4,7 @@ export const TopNav = styled.header`
   background: #272e44;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
   width: 100%;
+  padding:0 20px;
 `;
 
 export const Container = styled.div`
@@ -26,7 +27,7 @@ export const Container = styled.div`
     float: right;
     padding-top: 12px;
 
-    a {
+    a, .topbar-button {
       font-size: .89rem;
       border: 0.125rem solid #FFF;
       border-radius: 2rem;

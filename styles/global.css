@@ -250,4 +250,7 @@ h1 {
     background-color: #ff9800;
     text-align: center;
 }
+.form-isrecruiter{
+  display: flex;
+}
 
