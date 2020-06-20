@@ -107,6 +107,8 @@ export default function Home() {
     setIsloading(false);
   }
 
+
+
   // Fetch data if variable isRecruiter was changed
   useEffect(() => {
     try {
@@ -180,6 +182,7 @@ export default function Home() {
                 email={profile[1]}
                 cidade={profile[5]}
               />
+
             );
           })}
         {showProfiles.length === 0 && !isloading && <h2>Nenhum candidato corresponde ao cargo</h2>}

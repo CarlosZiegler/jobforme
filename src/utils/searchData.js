@@ -6,7 +6,7 @@ export default function searchData(list, target) {
 }
 export function searchDataDB(list, target) {
   const result = list.filter(
-    (contact) => contact.jobPosition.toLowerCase().includes(target.toLowerCase()),
+    (contact) => contact?.jobPosition?.toLowerCase().includes(target.toLowerCase()),
   );
   return result;
 }

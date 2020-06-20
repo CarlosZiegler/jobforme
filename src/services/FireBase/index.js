@@ -64,12 +64,8 @@ export const getUserDocument = async uid => {
     return null;
   }
 };
-export const updateUserDocument = async ({ uid }, { displayName,
-  jobPosition,
-  country,
-  region,
-  city,
-  linkedin }) => {
+export const updateUserDocument = async (
+  { uid }, { displayName, jobPosition, country, region, city, linkedin }) => {
   if (!uid) return null;
   try {
     const userRef = firestore.doc(`users/${uid}`);
@@ -83,7 +79,6 @@ export const updateUserDocument = async ({ uid }, { displayName,
     });
     return updateSingle;
   } catch (error) {
-    // console.error('Error fetching user', error);
     return null;
   }
 };
@@ -98,12 +93,10 @@ export const getAllUsers = async () => {
         });
       })
       .catch(err => {
-        // alert('Erro Inesperado', err);
-        // Router.push('/login');
+        console.log(err);
       });
     return users;
   } catch (error) {
-    // console.error('Error fetching user', error);
     return null;
   }
 };
@@ -120,11 +113,9 @@ export const getAllJobs = async () => {
       })
       .catch(err => {
         alert('Erro Inesperado', err);
-        // Router.push('/login');
       });
     return jobs;
   } catch (error) {
-    // console.error('Error fetching user', error);
     return null;
   }
 };

@@ -104,6 +104,7 @@ function Login() {
                 >
                   Entrar
                 </button>
+                <a href="/passwordforget">Recuperar senha</a>
               </div>
             </form>
           </Styles.Box>
