@@ -19,7 +19,7 @@ export default function Home() {
   const [showProfiles, setShowProfiles] = useState([]);
   const [qtdProfiles, setQtdProfiles] = useState(null);
   const [urlForm, setUrlForm] = useState('https://forms.gle/fxWpig6SHWVhBPj26');
-  const [addButtonText, setAddButtonText] = useState('Adicionar Perfil');
+  const [addButtonText, setAddButtonText] = useState('Adicione um perfil');
   const [textContextButton, setTextContextButton] = useState('Ir para Vagas');
   const [isRecruiter, setIsRecruiter] = useState(false);
   const [urlFetchData, seturlFetchData] = useState(
@@ -63,7 +63,7 @@ export default function Home() {
         'https://spreadsheets.google.com/feeds/cells/17LTWWLr0rB54bQOA1Ap3zzFUPfrnCsZK2EgjgruJIwc/1/public/full?alt=json',
       );
       setTextContextButton('Ir para Profissionais');
-      setAddButtonText('Adicionar Vaga');
+      setAddButtonText('Adicionar uma vaga');
 
       // url form for Recruiter add Jobs
       setUrlForm('https://forms.gle/zBQ3xAzZVruyTdpN9');
@@ -72,7 +72,7 @@ export default function Home() {
         'https://spreadsheets.google.com/feeds/cells/1DIOjyvCrP8wim2oedHu3SgXoD3RAZFytSnCR0xjK7e4/1/public/full?alt=json',
       );
       setTextContextButton('Ir para Vagas');
-      setAddButtonText('Adicionar Perfil');
+      setAddButtonText('Adicionar um perfil');
       // url form for Professional add Profile
       setUrlForm('https://forms.gle/fxWpig6SHWVhBPj26');
     }
@@ -119,12 +119,31 @@ export default function Home() {
     <Layout>
       <div className="header-page">
         <Topbar />
+        
         <div className="hiring">
           <Lottie className="lottieFile" options={hiringOptions} height="100%" width="100%" />
         </div>
+
+        <div className="about topbar" id="about">
+          <div class="page-header">
+            <h3>Sobre</h3>
+          </div>
+
+          <p>
+            A plataforma Job for Me tem como objetivo deixar visível para recrutadores 
+            profissionais que estão disponíveis para uma oportunidade de acordo com sua 
+            localização e seu cargo. Além disso, também disponibiliza vagas em aberto!
+          </p>
+
+          <p>
+          Procurando ajudar as pessoas que foram desligadas antes e durante a pandemia, 
+          desenvolvemos esse projeto com o intuito de gerar a principio um banco de 
+          profisssionais independente do cargo, área ou experiência para facilitar a vida dos recrutadores.
+          </p>
+        </div>
       </div>
 
-      <div className="section-profile-user">
+      <div className="section-profile-user" id="jobs-cards">
         <PrimaryButton value={textContextButton} onClick={handlerUserchange} />
         <p className="text-alert-section">
           {isRecruiter

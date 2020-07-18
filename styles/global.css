@@ -16,15 +16,13 @@ body {
   flex-direction: column;
 }
 
-.hiring {
-  flex: 1;
-  max-height: 90vh;
-}
-
+/* Jobforme Header */
 .topbar {
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
   width: 100%;
+  margin-top: 10px;
+  padding: 20px 0px;
 }
 
 .topbar .container {
@@ -33,6 +31,54 @@ body {
   align-items: center;
 }
 
+.topbar__logo {
+  border-radius: 20px;
+  padding: 0px 10px;
+  box-shadow: -2px 2px 10px rgba(245,245,245,1);;
+  transition: box-shadow 0.2s;
+}
+
+.topbar__logo:hover {
+  color: white;
+  background-color: rgb(141, 92, 196);
+  box-shadow: -2px 2px 10px rgb(141, 92, 196);
+  transition: box-shadow 0.5s linear 0s;
+  transition: color 0.5s linear 0s;
+  transition: background-color 0.5s linear 0s;
+}
+
+/* Gif searching */
+
+.hiring {
+  flex: 1;
+  max-height: 90vh;
+  width: 50%;
+}
+
+.header-page {
+  display: inline;
+}
+
+.about {
+  width: 40%;
+  vertical-align: top;
+  margin-top: 100px;
+  text-align: center;
+  padding: 30px;
+  font-size: 1.1em;
+}
+
+
+.about, .hiring {
+  display: inline-block;
+}
+
+/* Global CSS */
+.page-header {
+  border-bottom: 1px solid rgba(10,10,10,0.2);
+}
+
+/* Filters or searching and jobs */
 .filters {
   align-items: center;
   display: flex;
@@ -54,13 +100,6 @@ body {
   margin: 0 8px;
   padding: 10px;
   white-space: nowrap;
-}
-.filters {
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 24px 0;
-  margin: 0 5px;
 }
 
 .filters__search {
@@ -155,9 +194,6 @@ a:link,
 a:visited {
   text-decoration: none;
   color: black;
-}
-a:hover {
-  background: rgba(169, 169, 169, 0.333);
 }
 
 .container {
