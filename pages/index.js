@@ -125,7 +125,7 @@ export default function Home() {
         </div>
 
         <div className="about topbar" id="about">
-          <div class="page-header">
+          <div className="page-header">
             <h3>Sobre</h3>
           </div>
 
