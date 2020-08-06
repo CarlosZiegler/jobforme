@@ -88,12 +88,12 @@ export default function Home() {
 
     // get data from url
     const response = await api(dataUrl);
-
     // saving in a array the response
-    const arrayProfile = response.feed.entry.map(({ gs$cell }) => ({
+    const arrayProfile = response.data.feed.entry.map(({ gs$cell }) => ({
       value: gs$cell.inputValue,
       row: gs$cell.row,
     }));
+
 
     // group the response per row from Google Spreadsheets
     const rows = Object.values(groupByAttribute(arrayProfile, 'row'));
