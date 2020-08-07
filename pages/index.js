@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
 
+import Navbar from '@components/Navbar'
 import hiringData from '@assets/15563-hiring-isometric-animation (1).json';
 import loadingData from '@assets/loading.json';
 import Topbar from '@components/Topbar';
@@ -118,7 +119,7 @@ export default function Home() {
   return (
     <Layout>
       <div className="header-page">
-        <Topbar />
+        <Navbar />
         <div className="hiring">
           <Lottie className="lottieFile" options={hiringOptions} height="100%" width="100%" />
         </div>

@@ -3,6 +3,8 @@ import Router from 'next/router';
 import Link from 'next/link'
 import api from "@services/Api";
 
+import Navbar from '@components/Navbar'
+
 export default function Signup() {
   const [displayName, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -25,6 +27,7 @@ export default function Signup() {
   }
 
   return (<>
+    <Navbar />
     <div className="content">
       <h1 className="no-margin text-navy">Signup</h1>
       <p className="no-margin text-gray">Enter your details and get connected!</p>

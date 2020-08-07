@@ -3,6 +3,7 @@ import Router from 'next/router'
 import Link from 'next/link'
 
 import api from "@services/Api";
+import Navbar from '@components/Navbar'
 
 export default function Login(props) {
   const [email, setEmail] = useState('')
@@ -27,6 +28,7 @@ export default function Login(props) {
   }
 
   return (<>
+    <Navbar />
     <div className="content">
       <h1 className="no-margin text-navy">Login</h1>
       <p className="no-margin text-gray">Welcome back!</p>

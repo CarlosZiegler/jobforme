@@ -22,7 +22,7 @@ body {
 }
 
 .topbar {
-  background-color: white;
+  background-color: rgb(250, 200, 0);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
   width: 100%;
 }
@@ -213,3 +213,28 @@ h1 {
   background-color: #ff9800;
   text-align: center;
 }
+
+a, a:link, a:visited {
+  text-decoration: none;
+
+}
+.menu-item{
+  color:#ff9800;
+}
+
+.navbar{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:15px;
+  background-color: rgb(250, 200, 0);
+}
+.MuiButton-textPrimary{
+
+}
+.btn-coral{
+  color: #000000;
+  border:1px solid #000000 !important;
+}
+
+

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 
+import Navbar from '@components/Navbar'
 import api from "@services/api";
 
 
@@ -78,7 +79,8 @@ export default function Main() {
 
   if (!isReady || !token) return null
 
-  return (
+  return (<>
+    <Navbar />
     <div className="orders-container">
       <h1 className="header-table">Main</h1>
       <div className="search-container">
@@ -88,10 +90,10 @@ export default function Main() {
       {/* {orders && <Orders orders={showOrders} />} */}
       {token && <>
         <h1 onClick={handleLogout}>Ola</h1>
-
       </>}
 
     </div>
+  </>
 
 
   );
