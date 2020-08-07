@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Router from 'next/router';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -27,7 +27,14 @@ export default function SimpleMenu() {
     }
   }, [isReady])
 
-
+  const handleLogout = async () => {
+    try {
+      localStorage.clear()
+      Router.push('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
 
@@ -57,7 +64,7 @@ export default function SimpleMenu() {
               <a href="/main" className="menu-item">Main</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a href="/logout" className="menu-item">Logout</a>
+              <a className="menu-item" onClick={handleLogout}>Logout</a>
             </MenuItem>
           </div>)
         }

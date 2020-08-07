@@ -14,10 +14,7 @@ export default function Main() {
   const [findField, setFindField] = useState('')
   const [orderStatus, setOrderStatus] = useState('all')
   const [error, setError] = useState(null)
-
-  const config = {
-    headers: { Authorization: `Bearer ${token}` }
-  };
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     setIsReady(true)
@@ -28,24 +25,34 @@ export default function Main() {
   }, [isReady])
 
   useEffect(() => {
+
+    getUserProfile()
+
+  }, [token])
+
+  useEffect(() => {
     if (token === null && isReady === true) {
       Router.push('/login')
     }
   }, [isReady, token])
 
-  const getAllOrders = async () => {
+  const getUserProfile = async () => {
     try {
-      const { data } = await api.get("/orders", config);
-      if (data?.hasOwnProperty('error')) {
-        return setError(data.error)
+      if (token) {
+        const config = {
+          headers: { Authorization: `Bearer ${token}` }
+        };
+        const { data } = await api.get("/user", config);
+        if (data?.hasOwnProperty('error')) {
+          return setError(data.error)
+        }
+        setUser(data)
       }
-      setOrders(data)
+
     } catch (error) {
       console.log(error)
     }
   }
-
-
 
   const findOrders = () => {
     const result = orders.filter(order => order._id.includes(findField) || order.tableId?.number.includes(findField))
@@ -56,41 +63,26 @@ export default function Main() {
     findOrders()
   }, [findField])
 
-  const filterBy = (event) => {
-    if (orderStatus === 'all') {
-      return setShowOrders(orders)
-    }
-    const result = orders.filter((order) => order.status === orderStatus)
-    return setShowOrders(result)
-  }
-
-  useEffect(() => {
-    filterBy()
-  }, [orderStatus])
-
-  const handleLogout = async () => {
-    try {
-      localStorage.clear()
-      Router.push('/login')
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  if (!isReady || !token) return null
+  if (!isReady || !token || !user) return null
 
   return (<>
     <Navbar />
-    <div className="orders-container">
-      <h1 className="header-table">Main</h1>
-      <div className="search-container">
+    <div >
+      <h1>Main</h1>
+      {user && <>
+        <h1>Ola {user.email}</h1>
+        <div className="profile-container">
+          <a href="/create-profile">Create Profile</a>
+          <a href="/edit-profile">Edit Profile</a>
+        </div>
+      </>}
+
+      <div>
         {/* <SearchBar handlerOnChange={(e) => setFindField(e.target.value)} />
         <FilterBy title={'Status'} options={['paid', 'pending', 'all']} handlerOnchange={(e) => setOrderStatus(e.target.value)} /> */}
       </div>
       {/* {orders && <Orders orders={showOrders} />} */}
-      {token && <>
-        <h1 onClick={handleLogout}>Ola</h1>
-      </>}
+
 
     </div>
   </>

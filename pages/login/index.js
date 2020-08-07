@@ -20,7 +20,6 @@ export default function Login(props) {
       }
       localStorage.clear()
       localStorage.setItem('token', data?.token)
-      localStorage.setItem('user', data?.user)
       Router.push('/main')
     } catch (error) {
       console.log(error)
