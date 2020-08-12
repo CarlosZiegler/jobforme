@@ -226,12 +226,13 @@ a, a:link, a:visited {
   padding:15px;
   background-color: rgb(250, 200, 0);
 }
-.MuiButton-textPrimary{
-
-}
 .btn-coral{
   color: #000000;
   border:1px solid #000000 !important;
+}
+.professional-container{
+  display: flex;
+  flex-direction: column;
 }
 
 

@@ -72,8 +72,7 @@ export default function Main() {
       {user && <>
         <h1>Ola {user.email}</h1>
         <div className="profile-container">
-          <a href="/create-profile">Create Profile</a>
-          <a href="/edit-profile">Edit Profile</a>
+          <a href="/profile">Profile</a>
         </div>
       </>}
 

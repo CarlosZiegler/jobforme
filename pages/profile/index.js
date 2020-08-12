@@ -9,10 +9,6 @@ export default function Profile() {
 
   const [isReady, setIsReady] = useState(false)
   const [token, setToken] = useState(null)
-  const [orders, setOrders] = useState([])
-  const [showOrders, setShowOrders] = useState([])
-  const [findField, setFindField] = useState('')
-  const [orderStatus, setOrderStatus] = useState('all')
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
   const [professional, setProfessional] = useState({})
@@ -24,15 +20,16 @@ export default function Profile() {
   useEffect(() => {
     setIsReady(true)
   }, [])
+  useEffect(() => {
+    getProfessionalProfile()
+  }, [professional])
 
   useEffect(() => {
     setToken(localStorage?.getItem('token'))
   }, [isReady])
 
   useEffect(() => {
-
     getUserProfile()
-
   }, [token])
 
   useEffect(() => {
@@ -52,7 +49,8 @@ export default function Profile() {
           return setError(data.error)
         }
         setUser(data)
-        setProfessional(data.professionalProfile)
+        setProfessional(data.professionalProfile[0])
+
       }
 
     } catch (error) {
@@ -61,17 +59,10 @@ export default function Profile() {
   }
   const getProfessionalProfile = async () => {
     try {
-      if (token) {
-        // const config = {
-        //   headers: { Authorization: `Bearer ${token}` }
-        // };
-        // const { data } = await api.get(`/professional/${user.professionalProfile._id}`, config);
-        // if (data?.hasOwnProperty('error')) {
-        //   return setError(data.error)
-        // }
-        console.log(user.professionalProfile)
-        // setProfessional(user.professionalProfile)
-      }
+      setLinkedIn(professional.contact?.linkedIn || '')
+      setLink(professional.contact?.link || '')
+      setLocation(professional.location || '')
+      setPosition(professional.position || '')
 
     } catch (error) {
       console.log(error)
@@ -79,7 +70,7 @@ export default function Profile() {
   }
   const setUserProfissionalProfile = async () => {
     try {
-      if (token && professional.length === 0) {
+      if (token) {
         const config = {
           headers: { Authorization: `Bearer ${token}` }
         };
@@ -89,36 +80,34 @@ export default function Profile() {
           linkedin
         }
 
-        const { data } = await api.post("/professional/create", {
+        const { data } = professional ? await api.put(`/professional/update/${professional._id}`, {
           position, location, contact: {
             link,
             linkedIn,
           }
-        }, config);
+        }, config) : await api.post("/professional/create", {
+          position, location, contact: {
+            link,
+            linkedIn,
+          }
+        }, config)
 
         const result = await api.put("/user/update", {
           professionalProfile: data._id
         }, config);
+
         setLinkedIn('')
         setLink('')
         setLocation('')
         setPosition('')
         getUserProfile()
+        console.log(professional)
       }
-      setError('Voce ja tem um perfil')
+
     } catch (error) {
       setError(error)
     }
   }
-
-  const findOrders = () => {
-    const result = orders.filter(order => order._id.includes(findField) || order.tableId?.number.includes(findField))
-    return setShowOrders(result)
-  }
-
-  useEffect(() => {
-    findOrders()
-  }, [findField])
 
   if (!isReady || !token || !user) return null
 
@@ -128,7 +117,7 @@ export default function Profile() {
       <h1>Profile</h1>
       {user && <>
         <div className="signin-page">
-          <form >
+          <form className="professional-container">
             <h1>Perfil Profissional</h1>
             <label >Cargo</label>
             <input className="input-text" type="text" id="position" value={position} onChange={(e) => setPosition(e.target.value)} name="position" required />
@@ -138,19 +127,12 @@ export default function Profile() {
             <input className="input-text" type="text" id="link" value={link} onChange={(e) => setLink(e.target.value)} name="link" />
             <label >Linkedin</label>
             <input className="input-text" type="text" id="linkedin" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} name="linkedin" />
-            <button type="button" onClick={setUserProfissionalProfile}>Criar perfil Profissional</button>
-
+            <button type="button" onClick={setUserProfissionalProfile}>Update Perfil Profissional</button>
           </form>
         </div>
       </>}
-      <h2>{"teste"}</h2>
-      <h2 onClick={getProfessionalProfile}>view professional</h2>
       <div>
-        {/* <SearchBar handlerOnChange={(e) => setFindField(e.target.value)} />
-        <FilterBy title={'Status'} options={['paid', 'pending', 'all']} handlerOnchange={(e) => setOrderStatus(e.target.value)} /> */}
       </div>
-      {/* {orders && <Orders orders={showOrders} />} */}
-
       {error && <span>{error}</span>}
     </div>
   </>

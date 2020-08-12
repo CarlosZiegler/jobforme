@@ -1,8 +1,3 @@
-// export default async function api(url) {
-//   const response = await fetch(url);
-//   return response.json();
-// }
-
 import axios from "axios";
 
 const api = axios.create({
