@@ -12,7 +12,6 @@ export default function Main() {
   const [orders, setOrders] = useState([])
   const [showOrders, setShowOrders] = useState([])
   const [findField, setFindField] = useState('')
-  const [orderStatus, setOrderStatus] = useState('all')
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
 

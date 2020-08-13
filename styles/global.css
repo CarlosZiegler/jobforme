@@ -8,6 +8,11 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:#FFD600;
+}
+.content{
+  max-width: 1260px;
+  margin: 0 auto;
 }
 
 .header-page {
@@ -22,7 +27,6 @@ body {
 }
 
 .topbar {
-  background-color: rgb(250, 200, 0);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
   width: 100%;
 }
@@ -154,7 +158,6 @@ a,
 a:link,
 a:visited {
   text-decoration: none;
-  color: black;
 }
 a:hover {
   background: rgba(169, 169, 169, 0.333);
@@ -216,7 +219,6 @@ h1 {
 
 a, a:link, a:visited {
   text-decoration: none;
-
 }
 
 .navbar{
@@ -224,15 +226,114 @@ a, a:link, a:visited {
   justify-content: space-between;
   align-items: center;
   padding:15px;
-  background-color: rgb(250, 200, 0);
 }
-.btn-coral{
+.navbar :nth-child(1){
+
+}
+.btn-menu{
   color: #000000;
   border:1px solid #000000 !important;
+  border-radius: 30px !important;
+  padding: 5px 30px !important;
 }
 .professional-container{
   display: flex;
   flex-direction: column;
 }
+
+
+.header-content{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+
+.main-img{
+ width: 90%;
+ margin:50px auto;
+ max-width: 650px;
+}
+
+.main-text{
+  text-align: center;
+  font-size: 1.3rem;
+  margin:0 20px;
+
+}
+.text-bold{
+  font-weight: bold;
+}
+.text-ask{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin:5px auto
+}
+.btn-header-group{
+  display: flex;
+  flex-direction: column;
+  margin:30px auto;
+}
+.btn-primary{
+  color: #fff;
+  background-color: #4E4E4E;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  padding:10px 20px;
+  border-radius:20px;
+  margin-bottom:10px;
+
+}
+.btn-secondary{
+  color: #4E4E4E;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  padding:9px 25px;
+  border-radius:20px;
+  border:1px solid #4E4E4E;
+}
+
+.partner-container{
+  background:#4E4E4E;
+  width: 90%;
+  margin: 0 auto;
+  color:#fff;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:30px auto;
+}
+
+.partner-title{
+  font-size:1.5rem;
+}
+
+.partner-content{
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 30px;
+}
+.partner-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.partner-logo :nth-child(n){
+  margin:0 5px;
+}
+
+.btn-yellow{
+  color: #4E4E4E;
+  background-color: #FFD600;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  padding:10px 20px;
+  border-radius:20px;
+  margin-bottom:20px;
+}
+
+
 
 

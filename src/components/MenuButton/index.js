@@ -39,7 +39,7 @@ export default function SimpleMenu() {
   return (
 
     <div>
-      <Button className="btn-coral" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+      <Button className="btn-menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         <span >Menu</span>
       </Button>
       <Menu
