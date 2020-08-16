@@ -28,7 +28,6 @@ export default function Home() {
         <Link href="/signup"><a className="btn-secondary">Eu Estou procurando profissionais</a></Link>
       </div>
     </div>
-
     <div className="partner-container">
       <h3 className="partner-title">
         Empresas Solidarias
