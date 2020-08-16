@@ -107,7 +107,7 @@ body {
 }
 
 ::placeholder {
-  color: #9fa9bc;
+  color: #4E4E4E;
   font-weight: normal;
 }
 .card {
@@ -226,6 +226,8 @@ a, a:link, a:visited {
   justify-content: space-between;
   align-items: center;
   padding:15px;
+  max-width: 1020px;
+  margin:0 auto;
 }
 .navbar :nth-child(1){
 
@@ -247,11 +249,12 @@ a, a:link, a:visited {
   flex-direction: column;
   justify-content:center;
   align-items: center;
+  height: 100vh;
 }
 
 .main-img{
  width: 90%;
- margin:50px auto;
+ margin:20px auto;
  max-width: 650px;
 }
 
@@ -332,6 +335,92 @@ a, a:link, a:visited {
   padding:10px 20px;
   border-radius:20px;
   margin-bottom:20px;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:90%;
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 55vh;
+}
+.btn-green{
+  color: #fff;
+  background-color: #4AC300;
+  border:none;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  padding:10px 20px;
+  border-radius:20px;
+  margin-bottom:5px;
+}
+.form-input{
+  border: 1px solid #4E4E4E;
+  font-size: 1rem;
+  border-radius:20px;
+  margin-bottom:10px;
+  background: transparent;
+  padding:10px 15px;
+  color: #2F2E41;
+}
+.login-form > button{
+  margin-top: 5px;
+}
+.label{
+  font-size:1.1rem;
+  font-weight:bold;
+  margin-bottom: 5px;
+}
+.text-danger{
+  color: #9f0303;
+  background:#eba0a0;
+  max-width: 300px;
+  text-align:center;
+  padding:5px 15px;
+  border-radius:15px;
+
+}
+.main-content{
+
+}
+.signup-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:90%;
+  margin: 0 auto;
+  height: 60vh;
+  max-width: 500px;
+}
+.signup-form > button{
+  margin-top: 10px;
+}
+.text-after{
+  margin: 0;
+  text-align: center;
+}
+.login-img{
+ height: 200px;
+ margin-top: 30px;
+}
+.footer{
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+}
+.footer-container{
+  margin:10px;
 }
 
 

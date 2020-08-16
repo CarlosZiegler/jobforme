@@ -4,23 +4,34 @@ import Link from 'next/link'
 import api from "@services/Api";
 
 import Navbar from '@components/Navbar'
+import Footer from '@components/Footer'
+
+import signupImg from '@assets/signupImg.svg'
 
 export default function Signup() {
   const [displayName, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [error, setError] = useState(null)
 
 
+
   const handleSignup = async () => {
+
     try {
-      const { data } = await api.post("/signup", {
-        displayName, email, password
-      });
-      if (data?.hasOwnProperty('error')) {
-        return setError(data.error)
+      if (password === passwordConfirmation) {
+        const { data } = await api.post("/signup", {
+          displayName, email, password
+        });
+        if (data?.hasOwnProperty('error')) {
+          return setError(data.error)
+        }
+        return Router.push('/login')
       }
-      Router.push('/login')
+      console.log(error)
+      setError({ message: "Senhas não sao identicas, por favor verifique sua senha!" })
+
     } catch (error) {
       console.log(error)
     }
@@ -28,19 +39,23 @@ export default function Signup() {
 
   return (<>
     <Navbar />
-    <div className="content">
-      <h1 className="no-margin text-navy">Signup</h1>
-      <p className="no-margin text-gray">Enter your details and get connected!</p>
-      <br />
+    <div className="main-content">
+      <img src={signupImg} alt="" className="login-img" />
       <form className="signup-form">
-        <input type="text" className="" placeholder="Display Name" required onChange={(e) => setName(e.target.value)} />
-        <input type="text" className="" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
-        <input type="password" className="" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
-        <button className="btn-coral" type="button" onClick={() => handleSignup()}>Sign Up</button>
+        <h1 className="no-margin text-navy">Inscrever-se</h1>
+        <label htmlFor="displayname" className="label">Nome de usuario:</label>
+        <input type="text" className="form-input" id="displayname" placeholder="Display Name" required onChange={(e) => setName(e.target.value)} />
+        <label htmlFor="email" className="label">Email:</label>
+        <input type="text" className="form-input" id="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
+        <label htmlFor="password" className="label">Senha:</label>
+        <input type="password" className="form-input" placeholder="Senha" required onChange={(e) => setPassword(e.target.value)} />
+        <label htmlFor="password" className="label">Confirmar Senha:</label>
+        <input type="password" className="form-input" placeholder="Confirmar senha" required onChange={(e) => setPasswordConfirmation(e.target.value)} />
+        <button className="btn-green" type="button" onClick={() => handleSignup()}>Sign Up</button>
+        {error && <span className="text-danger">{error?.message}</span>}
+        <p className="text-after">Ja tem um conta? <Link href="/login"><a>Entrar</a></Link></p>
       </form>
-      {error && <span>{error?.message}</span>}
-      <br />
-      <p className="text-gray">Already have an account? <Link href="/login"><a>Login</a></Link></p>
     </div>
+    <Footer />
   </>);
 }

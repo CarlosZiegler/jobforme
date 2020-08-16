@@ -4,6 +4,9 @@ import Link from 'next/link'
 
 import api from "@services/Api";
 import Navbar from '@components/Navbar'
+import Footer from '@components/Footer'
+
+import loginImg from '@assets/imgLogin.svg'
 
 export default function Login(props) {
   const [email, setEmail] = useState('')
@@ -28,18 +31,19 @@ export default function Login(props) {
 
   return (<>
     <Navbar />
-    <div className="content">
-      <h1 className="no-margin text-navy">Login</h1>
-      <p className="no-margin text-gray">Welcome back!</p>
-      <br />
+    <div className="main-content">
+      <img src={loginImg} alt="" className="login-img" />
       <form className="login-form">
-        <input type="text" className="" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
-        <input type="password" className="" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
+        <h1 className="no-margin text-navy">Bem vindo de volta!</h1>
+        <label htmlFor="email" className="label">Email:</label>
+        <input type="text" id="email" className="form-input" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
+        <label htmlFor="senha" className="label">Senha:</label>
+        <input type="password" id="senha" className="form-input" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
         <button className="btn-green" type="button" onClick={() => handleLogin()}>LOGIN</button>
-        {error && <span>{error?.message}</span>}
+        {error && <span className="text-danger">{error?.message}</span>}
+        <p className="text-after">Don't have an account? <Link href="/signup"><a>Signup</a></Link></p>
       </form>
-      <br />
-      <p className="text-gray">Don't have an account? <Link href="/signup"><a>signup</a></Link></p>
     </div>
+    <Footer />
   </>);
 }

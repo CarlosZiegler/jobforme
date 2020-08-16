@@ -4,6 +4,7 @@ import Link from 'next/link'
 import api from "@services/Api";
 
 import Navbar from '@components/Navbar'
+import Footer from '@components/Footer'
 
 import hireImg from '@assets/hire.svg'
 import tntLogo from '@assets/tnt.svg'
@@ -41,6 +42,6 @@ export default function Home() {
       </div>
       <Link href="/parcerias"><a className="btn-yellow">Saiba Mais</a></Link>
     </div>
-
+    <Footer />
   </div>);
 }

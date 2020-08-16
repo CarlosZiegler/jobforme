@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 
 import Navbar from '@components/Navbar'
+import Footer from '@components/Footer'
 import api from "@services/api";
 
 
@@ -135,6 +136,7 @@ export default function Profile() {
       </div>
       {error && <span>{error}</span>}
     </div>
+    <Footer />
   </>
 
 
