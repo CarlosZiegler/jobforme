@@ -3,7 +3,10 @@ import Router from 'next/router';
 
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
+import Toggle from '@components/Toggle'
 import api from "@services/api";
+
+import profileImg from '@assets/profileImg.svg'
 
 
 export default function Profile() {
@@ -17,6 +20,8 @@ export default function Profile() {
   const [location, setLocation] = useState('')
   const [link, setLink] = useState('')
   const [linkedIn, setLinkedIn] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
+
 
   useEffect(() => {
     setIsReady(true)
@@ -114,23 +119,35 @@ export default function Profile() {
 
   return (<>
     <Navbar />
-    <div >
-      <h1>Profile</h1>
+    <div className="main-content" >
+      <img src={profileImg} alt="" className="login-img" />
       {user && <>
-        <div className="signin-page">
-          <form className="professional-container">
-            <h1>Perfil Profissional</h1>
-            <label >Cargo</label>
-            <input className="input-text" type="text" id="position" value={position} onChange={(e) => setPosition(e.target.value)} name="position" required />
-            <label >Localizaçao</label>
-            <input className="input-text" type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} name="location" required />
-            <label >Link</label>
-            <input className="input-text" type="text" id="link" value={link} onChange={(e) => setLink(e.target.value)} name="link" />
-            <label >Linkedin</label>
-            <input className="input-text" type="text" id="linkedin" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} name="linkedin" />
-            <button type="button" onClick={setUserProfissionalProfile}>Update Perfil Profissional</button>
-          </form>
+
+        <h1>Perfil Profissional</h1>
+        <form className="professional-container">
+          <label className="label" >Cargo</label>
+          <input className="professional-input" type="text" id="position" value={position} onChange={(e) => setPosition(e.target.value)} name="position" required />
+          <label className="label" >Localizaçao</label>
+          <input className="professional-input" type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} name="location" required />
+          <label className="label">Link</label>
+          <input className="professional-input" type="text" id="link" value={link} onChange={(e) => setLink(e.target.value)} name="link" />
+          <label className="label">Linkedin</label>
+          <input className="professional-input" type="text" id="linkedin" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} name="linkedin" />
+          {error && <span className="text-danger">{error?.message}</span>}
+        </form>
+        <div className="toggle-container">
+
         </div>
+        <Toggle
+          checked={isChecked}
+          size="default"
+          disabled={false}
+          onChange={() => setIsChecked(!isChecked)}
+          offstyle="btn-danger"
+          onstyle="btn-success"
+          text="Estou procurando emprego"
+        />
+        <button type="button" onClick={setUserProfissionalProfile}>Update Perfil Profissional</button>
       </>}
       <div>
       </div>

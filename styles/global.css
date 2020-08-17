@@ -407,6 +407,7 @@ a, a:link, a:visited {
  height: 200px;
  margin-top: 30px;
 }
+/* footer */
 .footer{
   display: flex;
   justify-content: space-between;
@@ -417,6 +418,124 @@ a, a:link, a:visited {
 }
 .footer-container{
   margin:10px;
+}
+
+/* professional Profile  */
+.professional-container{
+  background:#4E4E4E;
+  color:#fff;
+  padding:20px;
+  border-radius: 20px;
+  width: 75%;
+  margin-bottom: 20px;
+}
+.professional-input{
+  color:#CBCBCB;
+  background: transparent;
+  border:none;
+  margin-left: 10px;
+  font-size:1rem;
+  margin-bottom:5px;
+}
+
+/* Toggle */
+.toggle{
+  margin-bottom:30px;
+}
+
+hr {
+  margin: 15px 0;
+}
+
+label {
+  user-select: none;
+}
+.switch-wrapper > input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.switch-wrapper > input[type="checkbox"] + .switch {
+  transform: translateX(5px);
+}
+.switch-wrapper > input[type="checkbox"]:checked + .switch {
+  transform: translateX(50%) translateX(-19px);
+}
+.switch-wrapper.large > input[type="checkbox"]:checked + .switch {
+  transform: translateX(50%) translateX(-35px);
+}
+.switch-wrapper > input[type="checkbox"]:disabled + .switch {
+  background: #ccc;
+}
+
+.switch-wrapper {
+  border-radius: 20px;
+  cursor: pointer;
+  height: 24px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  width: 48px;
+}
+.switch-wrapper.large {
+  height: 40px;
+  width: 80px;
+}
+.switch-wrapper > .switch {
+  color: #fff;
+  display: inline-block;
+  height: 100%;
+  left: -100%;
+  position: relative;
+  transition: 100ms linear;
+  width: 200%;
+}
+.switch-wrapper > .switch > .switch-handle {
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  height: 14px;
+  left: 50%;
+  position: relative;
+  top: 2px;
+  width: 14px;
+  z-index: 3;
+}
+.switch-wrapper.large > .switch > .switch-handle {
+  height: 30px;
+  width: 30px;
+}
+.switch-label {
+  float: left;
+  line-height: 2.5rem;
+  margin-left: 10px;
+}
+.switch-wrapper.large + .switch-label {
+  line-height: 4rem;
+  margin-left: 15px;
+}
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #d80020;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #398439;
+  border-color: #255625;
+}
+.control-label{
+  display: flex;
+  justify-content:center;
+}
+.toggle-text{
+  margin-left:10px;
 }
 
 

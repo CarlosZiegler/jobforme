@@ -39,8 +39,8 @@ export default function Login(props) {
         <input type="text" id="email" className="form-input" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
         <label htmlFor="senha" className="label">Senha:</label>
         <input type="password" id="senha" className="form-input" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
-        <button className="btn-green" type="button" onClick={() => handleLogin()}>LOGIN</button>
         {error && <span className="text-danger">{error?.message}</span>}
+        <button className="btn-green" type="button" onClick={() => handleLogin()}>LOGIN</button>
         <p className="text-after">Don't have an account? <Link href="/signup"><a>Signup</a></Link></p>
       </form>
     </div>

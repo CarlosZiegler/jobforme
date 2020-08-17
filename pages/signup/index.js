@@ -51,8 +51,8 @@ export default function Signup() {
         <input type="password" className="form-input" placeholder="Senha" required onChange={(e) => setPassword(e.target.value)} />
         <label htmlFor="password" className="label">Confirmar Senha:</label>
         <input type="password" className="form-input" placeholder="Confirmar senha" required onChange={(e) => setPasswordConfirmation(e.target.value)} />
-        <button className="btn-green" type="button" onClick={() => handleSignup()}>Sign Up</button>
         {error && <span className="text-danger">{error?.message}</span>}
+        <button className="btn-green" type="button" onClick={() => handleSignup()}>Sign Up</button>
         <p className="text-after">Ja tem um conta? <Link href="/login"><a>Entrar</a></Link></p>
       </form>
     </div>
