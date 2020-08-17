@@ -533,6 +533,8 @@ label {
 .control-label{
   display: flex;
   justify-content:center;
+  font-weight: bolder;
+  color: #4E4E4E;
 }
 .toggle-text{
   margin-left:10px;

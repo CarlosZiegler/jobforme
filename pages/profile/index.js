@@ -147,7 +147,7 @@ export default function Profile() {
           onstyle="btn-success"
           text="Estou procurando emprego"
         />
-        <button type="button" onClick={setUserProfissionalProfile}>Update Perfil Profissional</button>
+        <button type="button" className="btn-green" onClick={setUserProfissionalProfile}>Update Perfil Profissional</button>
       </>}
       <div>
       </div>
