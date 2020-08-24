@@ -24,8 +24,8 @@ export default function Home() {
         E você, quem é?
         </span>
       <div className="btn-header-group">
-        <Link href="/jobs"><a className="btn-primary">Eu Estou procurando novo emprego</a></Link>
-        <Link href="/signup"><a className="btn-secondary">Eu Estou procurando profissionais</a></Link>
+        <Link href="/jobs"><a className="btn-primary">Eu estou procurando novo emprego</a></Link>
+        <Link href="/signup"><a className="btn-secondary">Eu estou procurando profissionais</a></Link>
       </div>
     </div>
     <div className="partner-container">

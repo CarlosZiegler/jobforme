@@ -10,6 +10,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background:#FFD600;
 }
+button{
+  border:none;
+}
 .content{
   max-width: 1260px;
   margin: 0 auto;
@@ -159,9 +162,9 @@ a:link,
 a:visited {
   text-decoration: none;
 }
-a:hover {
+/* a:hover {
   background: rgba(169, 169, 169, 0.333);
-}
+} */
 
 .container {
   display: flex;
@@ -333,7 +336,8 @@ a, a:link, a:visited {
   font-weight: bolder;
   padding:10px 20px;
   border-radius:20px;
-  margin-bottom:20px;
+  margin-bottom: 10px;
+
 }
 
 .main-content{
@@ -381,6 +385,16 @@ a, a:link, a:visited {
   padding:10px 15px;
   color: #2F2E41;
 }
+.search-input{
+  border: 1px solid #4E4E4E;
+  font-size: 1rem;
+  border-radius:20px;
+  margin-bottom:10px;
+  background: transparent;
+  padding:10px 15px;
+  color: #2F2E41;
+  width: 80%;
+}
 .login-form > button{
   margin-top: 5px;
 }
@@ -425,6 +439,8 @@ a, a:link, a:visited {
   left: 0;
   bottom: 0;
   width: 100%;
+  max-width: 1020px;
+  margin:0 auto;
 }
 .footer-container{
   margin:10px;
@@ -438,6 +454,7 @@ a, a:link, a:visited {
   border-radius: 20px;
   width: 75%;
   margin-bottom: 20px;
+  max-width: 500px;
 }
 .professional-input{
   color:#CBCBCB;
@@ -551,6 +568,51 @@ label {
 }
 .btn-group :nth-child(2){
   margin-left: 15px;
+}
+.jobs-container{
+  min-height: 200px;
+}
+.result-info{
+  color: #005A19;
+  background:#BAFFC5;
+  padding: 5px 10px;
+  border-radius:10px;
+  max-width: 300px;
+  text-align: center;
+  margin:10px auto;
+
+}
+.result-container{
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: center;
+ margin: 0 auto;
+}
+.job-card{
+  background:#4E4E4E;
+  padding: 20px;
+  border-radius:15px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin:5px;
+  width: 125px;
+  height: 200px;
+}
+
+.job-card-location{
+  display: flex;
+  font-size: 1.2rem;
+  align-self: start;
+}
+.job-card-title{
+  font-size: 1.3rem;
+  font-weight: bolder;
+  text-align: center;
+  max-width: 80%;
 }
 
 
