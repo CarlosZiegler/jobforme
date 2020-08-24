@@ -6,7 +6,7 @@ import Footer from '@components/Footer'
 import api from "@services/api";
 
 
-export default function Main() {
+export default function Vacancies() {
 
   const [isReady, setIsReady] = useState(false)
   const [token, setToken] = useState(null)
@@ -25,9 +25,7 @@ export default function Main() {
   }, [isReady])
 
   useEffect(() => {
-
     getUserProfile()
-
   }, [token])
 
   useEffect(() => {
@@ -67,28 +65,19 @@ export default function Main() {
 
   return (<>
     <Navbar />
-    <div >
-      <h1>Main</h1>
-      {user && <>
-        <h1>Ola {user.email}</h1>
-        <div className="profile-container">
-          <a href="/profile">Meu Perfil</a>
-          <a href="/profile">Perfil Profissional</a>
-          <a href="/vacancies">Ir para Vagas</a>
-        </div>
-      </>}
 
-      <div>
-        {/* <SearchBar handlerOnChange={(e) => setFindField(e.target.value)} />
+    {user &&
+      <div className="main-container">
+
+
+        <div>
+          {/* <SearchBar handlerOnChange={(e) => setFindField(e.target.value)} />
         <FilterBy title={'Status'} options={['paid', 'pending', 'all']} handlerOnchange={(e) => setOrderStatus(e.target.value)} /> */}
+        </div>
+        {/* {orders && <Orders orders={showOrders} />} */}
       </div>
-      {/* {orders && <Orders orders={showOrders} />} */}
-
-
-    </div>
+    }
     <Footer />
   </>
-
-
   );
 }

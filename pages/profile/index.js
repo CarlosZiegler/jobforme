@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
+import Link from 'next/link';
 
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
@@ -7,7 +8,6 @@ import Toggle from '@components/Toggle'
 import api from "@services/api";
 
 import profileImg from '@assets/profileImg.svg'
-
 
 export default function Profile() {
 
@@ -21,6 +21,8 @@ export default function Profile() {
   const [link, setLink] = useState('')
   const [linkedIn, setLinkedIn] = useState('')
   const [isChecked, setIsChecked] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(true)
+
 
 
   useEffect(() => {
@@ -37,6 +39,8 @@ export default function Profile() {
   useEffect(() => {
     getUserProfile()
   }, [token])
+
+
 
   useEffect(() => {
     if (token === null && isReady === true) {
@@ -69,11 +73,17 @@ export default function Profile() {
       setLink(professional.contact?.link || '')
       setLocation(professional.location || '')
       setPosition(professional.position || '')
+      setIsChecked(professional.isActive || false)
 
     } catch (error) {
       console.log(error)
     }
   }
+  const handleCancelUpades = () => {
+    getUserProfile()
+    setIsDisabled(!isDisabled)
+  }
+
   const setUserProfissionalProfile = async () => {
     try {
       if (token) {
@@ -86,30 +96,29 @@ export default function Profile() {
           linkedin
         }
 
-        const { data } = professional ? await api.put(`/professional/update/${professional._id}`, {
-          position, location, contact: {
-            link,
-            linkedIn,
-          }
-        }, config) : await api.post("/professional/create", {
-          position, location, contact: {
-            link,
-            linkedIn,
-          }
-        }, config)
+        let data
+        if (user.professionalProfile.length === 1) {
+          data = await api.put(`/professional/update/${professional._id}`, {
+            position, location, isActive: isChecked, contact: {
+              link,
+              linkedIn,
+            }
+          }, config)
+        } else {
+          data = await api.post("/professional/create", {
+            position, location, isActive: isChecked, contact: {
+              link,
+              linkedIn,
+            }
+          }, config)
+          const result = await api.put("/user/update", {
+            professionalProfile: data._id
+          }, config);
 
-        const result = await api.put("/user/update", {
-          professionalProfile: data._id
-        }, config);
-
-        setLinkedIn('')
-        setLink('')
-        setLocation('')
-        setPosition('')
+        }
         getUserProfile()
-        console.log(professional)
+        setIsDisabled(!isDisabled)
       }
-
     } catch (error) {
       setError(error)
     }
@@ -122,17 +131,20 @@ export default function Profile() {
     <div className="main-content" >
       <img src={profileImg} alt="" className="login-img" />
       {user && <>
-
         <h1>Perfil Profissional</h1>
         <form className="professional-container">
           <label className="label" >Cargo</label>
-          <input className="professional-input" type="text" id="position" value={position} onChange={(e) => setPosition(e.target.value)} name="position" required />
+          <input className="professional-input" type="text" id="position" value={position} onChange={(e) => setPosition(e.target.value)} name="position" required
+            disabled={isDisabled ? "disabled" : ""} />
           <label className="label" >Localizaçao</label>
-          <input className="professional-input" type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} name="location" required />
+          <input className="professional-input" type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)} name="location" required
+            disabled={isDisabled ? "disabled" : ""} />
           <label className="label">Link</label>
-          <input className="professional-input" type="text" id="link" value={link} onChange={(e) => setLink(e.target.value)} name="link" />
+          <input className="professional-input" type="text" id="link" value={link} onChange={(e) => setLink(e.target.value)} name="link"
+            disabled={isDisabled ? "disabled" : ""} />
           <label className="label">Linkedin</label>
-          <input className="professional-input" type="text" id="linkedin" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} name="linkedin" />
+          <input className="professional-input" type="text" id="linkedin" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} name="linkedin"
+            disabled={isDisabled ? "disabled" : ""} />
           {error && <span className="text-danger">{error?.message}</span>}
         </form>
         <div className="toggle-container">
@@ -141,13 +153,20 @@ export default function Profile() {
         <Toggle
           checked={isChecked}
           size="default"
-          disabled={false}
+          disabled={isDisabled}
           onChange={() => setIsChecked(!isChecked)}
           offstyle="btn-danger"
           onstyle="btn-success"
-          text="Estou procurando emprego"
+          text={isChecked ? "Estou procurando emprego" : "Não estou procurando emprego"}
         />
-        <button type="button" className="btn-green" onClick={setUserProfissionalProfile}>Update Perfil Profissional</button>
+        <div className="btn-group">
+          {isDisabled && <button type="button" className="btn-green" onClick={() => setIsDisabled(!isDisabled)}>Editar Perfil Profissional</button>}
+          {isDisabled === false && <>
+            <button type="button" className="btn-red" onClick={() => handleCancelUpades()}>Cancel</button>
+            <button type="button" className="btn-green" onClick={() => setUserProfissionalProfile()}>Update</button>
+          </>}
+        </div>
+        <Link href="/main"><a className="btn-primary">Voltar</a></Link>
       </>}
       <div>
       </div>

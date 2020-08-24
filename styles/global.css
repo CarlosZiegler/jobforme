@@ -341,6 +341,7 @@ a, a:link, a:visited {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 .login-form{
   display: flex;
@@ -354,6 +355,16 @@ a, a:link, a:visited {
 .btn-green{
   color: #fff;
   background-color: #4AC300;
+  border:none;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  padding:10px 20px;
+  border-radius:20px;
+  margin-bottom:5px;
+}
+.btn-red{
+  color: #fff;
+  background-color: #e83600;
   border:none;
   font-size: 1.2rem;
   font-weight: bolder;
@@ -414,7 +425,6 @@ a, a:link, a:visited {
   left: 0;
   bottom: 0;
   width: 100%;
-
 }
 .footer-container{
   margin:10px;
@@ -539,7 +549,9 @@ label {
 .toggle-text{
   margin-left:10px;
 }
-
+.btn-group :nth-child(2){
+  margin-left: 15px;
+}
 
 
 
