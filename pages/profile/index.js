@@ -23,14 +23,9 @@ export default function Profile() {
   const [isChecked, setIsChecked] = useState(false)
   const [isDisabled, setIsDisabled] = useState(true)
 
-
-
   useEffect(() => {
     setIsReady(true)
   }, [])
-  useEffect(() => {
-    getProfessionalProfile()
-  }, [professional])
 
   useEffect(() => {
     setToken(localStorage?.getItem('token'))
@@ -40,7 +35,9 @@ export default function Profile() {
     getUserProfile()
   }, [token])
 
-
+  useEffect(() => {
+    getProfessionalProfile()
+  }, [professional])
 
   useEffect(() => {
     if (token === null && isReady === true) {
@@ -59,8 +56,7 @@ export default function Profile() {
           return setError(data.error)
         }
         setUser(data)
-        setProfessional(data.professionalProfile[0])
-
+        setProfessional(data.professionalProfile)
       }
 
     } catch (error) {
@@ -69,41 +65,39 @@ export default function Profile() {
   }
   const getProfessionalProfile = async () => {
     try {
-      setLinkedIn(professional.contact?.linkedIn || '')
-      setLink(professional.contact?.link || '')
-      setLocation(professional.location || '')
-      setPosition(professional.position || '')
-      setIsChecked(professional.isActive || false)
-
+      setLinkedIn(professional?.contact?.linkedIn || '')
+      setLink(professional?.contact?.link || '')
+      setLocation(professional?.location || '')
+      setPosition(professional?.position || '')
+      setIsChecked(professional?.isActive || false)
     } catch (error) {
       console.log(error)
     }
   }
-  const handleCancelUpades = () => {
+  const handleCancelUpdates = () => {
     getUserProfile()
     setIsDisabled(!isDisabled)
   }
 
-  const setUserProfissionalProfile = async () => {
+  const createOrUpdateUserProfessionalProfile = async () => {
+
     try {
       if (token) {
         const config = {
           headers: { Authorization: `Bearer ${token}` }
         };
 
-        const contactObj = {
-          link,
-          linkedin
-        }
-
         let data
-        if (user.professionalProfile.length === 1) {
+
+        if (user.professionalProfile !== null) {
           data = await api.put(`/professional/update/${professional._id}`, {
             position, location, isActive: isChecked, contact: {
               link,
               linkedIn,
             }
           }, config)
+
+
         } else {
           data = await api.post("/professional/create", {
             position, location, isActive: isChecked, contact: {
@@ -112,12 +106,13 @@ export default function Profile() {
             }
           }, config)
           const result = await api.put("/user/update", {
-            professionalProfile: data._id
+            professionalProfile: data.data._id
           }, config);
-
         }
+
         getUserProfile()
         setIsDisabled(!isDisabled)
+
       }
     } catch (error) {
       setError(error)
@@ -162,8 +157,8 @@ export default function Profile() {
         <div className="btn-group">
           {isDisabled && <button type="button" className="btn-green" onClick={() => setIsDisabled(!isDisabled)}>Editar Perfil Profissional</button>}
           {isDisabled === false && <>
-            <button type="button" className="btn-red" onClick={() => handleCancelUpades()}>Cancel</button>
-            <button type="button" className="btn-green" onClick={() => setUserProfissionalProfile()}>Update</button>
+            <button type="button" className="btn-red" onClick={() => handleCancelUpdates()}>Cancel</button>
+            <button type="button" className="btn-green" onClick={() => createOrUpdateUserProfessionalProfile()}>Update</button>
           </>}
         </div>
         <Link href="/main"><a className="btn-primary">Voltar</a></Link>

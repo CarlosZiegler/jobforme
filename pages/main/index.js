@@ -74,7 +74,7 @@ export default function Main() {
         <div className="options-container">
           <a href="/profile" className="options-item">Meu Perfil</a>
           {user?.role === 'professional' && <a href="/profile" className="options-item">Perfil Profissional</a>}
-          <a href="/vacancies" className="options-item">Ir para Vagas</a>
+          <a href="/vagas" className="options-item">Ir para Vagas</a>
         </div>
       </>}
 
