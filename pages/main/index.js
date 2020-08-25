@@ -21,13 +21,12 @@ export default function Main() {
   }, [])
 
   useEffect(() => {
+
     setToken(localStorage?.getItem('token'))
   }, [isReady])
 
   useEffect(() => {
-
     getUserProfile()
-
   }, [token])
 
   useEffect(() => {
@@ -46,6 +45,7 @@ export default function Main() {
         if (data?.hasOwnProperty('error')) {
           return setError(data.error)
         }
+        console.log(data)
         setUser(data)
       }
 
@@ -67,14 +67,14 @@ export default function Main() {
 
   return (<>
     <Navbar />
-    <div >
+    <div className="main-content">
       <h1>Main</h1>
       {user && <>
-        <h1>Ola {user.email}</h1>
-        <div className="profile-container">
-          <a href="/profile">Meu Perfil</a>
-          <a href="/profile">Perfil Profissional</a>
-          <a href="/vacancies">Ir para Vagas</a>
+        <h1>Ola {user.displayName}</h1>
+        <div className="options-container">
+          <a href="/profile" className="options-item">Meu Perfil</a>
+          {user?.role === 'professional' && <a href="/profile" className="options-item">Perfil Profissional</a>}
+          <a href="/vacancies" className="options-item">Ir para Vagas</a>
         </div>
       </>}
 
