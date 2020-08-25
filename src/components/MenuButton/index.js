@@ -52,12 +52,12 @@ export default function SimpleMenu() {
         <MenuItem onClick={handleClose}>
           <a href="/" className="menu-item">Home</a>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        {!token && <div><MenuItem onClick={handleClose}>
           <a href="/login" className="menu-item">Login</a>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <a href="/signup" className="menu-item">Signup</a>
-        </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <a href="/signup" className="menu-item">Signup</a>
+          </MenuItem></div>}
         {token && (
           <div>
             <MenuItem onClick={handleClose}>

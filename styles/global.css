@@ -345,6 +345,9 @@ a, a:link, a:visited {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 90%;
+  min-height:625px;
+  margin:0 auto;
   margin-bottom: 20px;
 }
 .login-form{
@@ -410,6 +413,8 @@ a, a:link, a:visited {
   text-align:center;
   padding:5px 15px;
   border-radius:15px;
+  display: flex;
+  align-self: center;
 
 }
 .signup-form{
@@ -418,7 +423,7 @@ a, a:link, a:visited {
   justify-content: center;
   width:90%;
   margin: 0 auto;
-  height: 60vh;
+  min-height: 60vh;
   max-width: 500px;
 }
 .signup-form > button{
@@ -551,6 +556,16 @@ label {
   background-color: #ff0000;
   border-color: #d80020;
 }
+.btn-profi {
+  color: #fff;
+  background-color: #2488f2;
+  border-color: #0244a7;
+}
+.btn-company {
+  color: #fff;
+  background-color: #ff8400;
+  border-color: #d86500;
+}
 
 .btn-success:hover {
   color: #fff;
@@ -577,7 +592,7 @@ label {
   background:#BAFFC5;
   padding: 5px 10px;
   border-radius:10px;
-  max-width: 300px;
+  max-width: 80%;
   text-align: center;
   margin:10px auto;
 
@@ -599,7 +614,7 @@ label {
   align-items: center;
   justify-content: space-between;
   margin:5px;
-  width: 125px;
+  width: 140px;
   height: 200px;
 }
 
@@ -613,6 +628,26 @@ label {
   font-weight: bolder;
   text-align: center;
   max-width: 80%;
+}
+.options-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  height:100px;
+  flex-wrap: wrap;
+}
+.options-item{
+  width:100%;
+  padding:10px 20px;
+  margin:5px;
+  background: #4E4E4E;
+  color: #fff;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:15px;
 }
 
 
