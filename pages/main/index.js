@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
+import Link from 'next/link'
 
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
@@ -10,8 +11,8 @@ export default function Main() {
 
   const [isReady, setIsReady] = useState(false)
   const [token, setToken] = useState(null)
-  const [orders, setOrders] = useState([])
-  const [showOrders, setShowOrders] = useState([])
+  const [vacancies, setVacancies] = useState([])
+  const [showVacancies, setShowVacancies] = useState([])
   const [findField, setFindField] = useState('')
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
@@ -35,6 +36,12 @@ export default function Main() {
     }
   }, [isReady, token])
 
+  useEffect(() => {
+    if (user != null && user?.role === "company") {
+      setVacancies(user.vacancies)
+    }
+  }, [user])
+
   const getUserProfile = async () => {
     try {
       if (token) {
@@ -45,7 +52,6 @@ export default function Main() {
         if (data?.hasOwnProperty('error')) {
           return setError(data.error)
         }
-        console.log(data)
         setUser(data)
       }
 
@@ -55,8 +61,8 @@ export default function Main() {
   }
 
   const findOrders = () => {
-    const result = orders.filter(order => order._id.includes(findField) || order.tableId?.number.includes(findField))
-    return setShowOrders(result)
+    const result = vacancies.filter(order => order._id.includes(findField) || order.tableId?.number.includes(findField))
+    return setShowVacancies(result)
   }
 
   useEffect(() => {
@@ -73,8 +79,9 @@ export default function Main() {
         <h1>Ola {user.displayName}</h1>
         <div className="options-container">
           <a href="/profile" className="options-item">Meu Perfil</a>
-          {user?.role === 'professional' && <a href="/profile" className="options-item">Perfil Profissional</a>}
-          <a href="/vagas" className="options-item">Ir para Vagas</a>
+          {user?.role === 'professional' && <Link href="/profile"><a className="options-item">Perfil Profissional</a></Link>}
+          <Link href="/vagas"><a className="options-item">Ir para Vagas</a></Link>
+          <Link href="/signup"><a>Signup</a></Link>
         </div>
       </>}
 
