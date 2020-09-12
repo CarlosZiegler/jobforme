@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
 import Toggle from '@components/Toggle'
-import api from "@services/api";
+import api from "@services/Api";
 
 import profileImg from '@assets/profileImg.svg'
 
