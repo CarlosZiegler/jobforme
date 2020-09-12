@@ -33,7 +33,7 @@ export default function Home() {
         Empresas Solidarias
       </h3>
       <p className="partner-content">
-        Qual está sendo sua ação diante do mundo e legado que irá deixar?
+        Qual está sendo sua ação diante do mundo e o legado que irá deixar?
       </p>
       <div className="partner-logo">
         <a href="https://gama.academy/"><img src={gamaLogo} alt="" className="Gama Academy" /></a>

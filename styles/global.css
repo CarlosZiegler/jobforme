@@ -278,6 +278,7 @@ a, a:link, a:visited {
   display: flex;
   flex-direction: column;
   margin:30px auto;
+  width: 90%;
 }
 .btn-primary{
   color: #fff;
@@ -287,6 +288,7 @@ a, a:link, a:visited {
   padding:10px 20px;
   border-radius:20px;
   margin-bottom:10px;
+  text-align:center;
 
 }
 .btn-secondary{
@@ -296,6 +298,7 @@ a, a:link, a:visited {
   padding:9px 25px;
   border-radius:20px;
   border:1px solid #4E4E4E;
+  text-align:center;
 }
 
 .partner-container{
@@ -634,7 +637,6 @@ label {
   justify-content: center;
   align-items: center;
   max-width: 80%;
-  height:100px;
   flex-wrap: wrap;
 }
 .options-item{
@@ -649,6 +651,8 @@ label {
   align-items: center;
   border-radius:15px;
 }
-
+.searchbar{
+  margin:30px;
+}
 
 

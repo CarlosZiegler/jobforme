@@ -6,7 +6,6 @@ import Lottie from 'react-lottie';
 import Navbar from '@components/Navbar'
 import hiringData from '@assets/15563-hiring-isometric-animation (1).json';
 import loadingData from '@assets/loading.json';
-import Topbar from '@components/Topbar';
 import Card from '@components/card';
 import Filters from '@components/Filters';
 import { PrimaryButton } from '@components/Buttons';

@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
+import CardJobs from '@components/CardJobs'
 import api from "@services/api";
 
 
@@ -38,6 +39,7 @@ export default function Main() {
 
   useEffect(() => {
     if (user != null && user?.role === "company") {
+      console.log(user)
       setVacancies(user.vacancies)
     }
   }, [user])
@@ -79,19 +81,31 @@ export default function Main() {
         <h1>Ola {user.displayName}</h1>
         <div className="options-container">
           <a href="/profile" className="options-item">Meu Perfil</a>
-          {user?.role === 'professional' && <Link href="/profile"><a className="options-item">Perfil Profissional</a></Link>}
-          <Link href="/vagas"><a className="options-item">Ir para Vagas</a></Link>
-          <Link href="/signup"><a>Signup</a></Link>
+          {user?.role === 'professional' && <>
+            <Link href="/profile">
+              <a className="options-item">Perfil Profissional</a>
+            </Link>
+            <Link href="/vagas">
+              <a className="options-item">Ir para Vagas</a>
+            </Link>
+          </>
+          }
+          {user?.role === 'company' && <Link href="/adicionar-vagas">
+            <a className="options-item">Adicionar Vaga</a>
+          </Link>}
         </div>
       </>}
-
-      <div>
-        {/* <SearchBar handlerOnChange={(e) => setFindField(e.target.value)} />
-        <FilterBy title={'Status'} options={['paid', 'pending', 'all']} handlerOnchange={(e) => setOrderStatus(e.target.value)} /> */}
-      </div>
       {/* {orders && <Orders orders={showOrders} />} */}
+      <div className="searchbar">
+        {user?.role === 'company' && <>
+          <div className="jobs-container">
+            {vacancies && <>
+              {vacancies.map(vacancy => <CardJobs key={vacancy._id} job={vacancy} />)}
+            </>}
 
-
+          </div>
+        </>}
+      </div>
     </div>
     <Footer />
   </>
