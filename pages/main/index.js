@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
 import CardJobs from '@components/CardJobs'
-import api from "@services/api";
+import api from "@services/Api";
 
 
 export default function Main() {

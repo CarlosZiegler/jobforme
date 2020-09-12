@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const apiFecth = axios.create({
+const api = axios.create({
   // baseURL: 'http://localhost:3333'
   baseURL: 'http://46.101.99.135'
 });
 
-export default apiFecth;
+export default api;
