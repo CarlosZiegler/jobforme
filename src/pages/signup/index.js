@@ -28,6 +28,7 @@ export default function Signup() {
         if (data?.hasOwnProperty('error')) {
           return setError(data.error)
         }
+        console.log('aqui')
         return Router.push('/login')
       }
       console.log(error)

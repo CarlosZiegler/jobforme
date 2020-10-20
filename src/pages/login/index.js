@@ -12,7 +12,6 @@ export default function Login(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-
   const handleLogin = async () => {
     try {
       const { data } = await api.post("/login", {
