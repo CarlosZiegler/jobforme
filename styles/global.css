@@ -279,6 +279,7 @@ a, a:link, a:visited {
   flex-direction: column;
   margin:30px auto;
   width: 90%;
+  max-width: 450px;
 }
 .btn-primary{
   color: #fff;
@@ -312,6 +313,7 @@ a, a:link, a:visited {
   justify-content: center;
   align-items: center;
   margin:30px auto;
+  max-width: 600px;
 }
 
 .partner-title{

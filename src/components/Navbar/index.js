@@ -7,7 +7,12 @@ function Navbar() {
 
   return (
     <header className="navbar">
-      <span>SiteDoBem</span>
+      <Link href="/">
+        <a className="btn-primary">
+          <h2>SiteDoBem</h2>
+        </a>
+      </Link>
+
       <MenuButton />
     </header>
   );
