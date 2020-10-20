@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <header className="navbar">
       <Link href="/">
-        <a className="btn-primary">
+        <a>
           <h2>SiteDoBem</h2>
         </a>
       </Link>
