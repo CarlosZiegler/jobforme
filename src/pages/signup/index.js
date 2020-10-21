@@ -5,6 +5,7 @@ import api from "@services/Api";
 
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
+import Toggle from '@components/Toggle'
 
 import signupImg from '@assets/signupImg.svg'
 
@@ -15,6 +16,8 @@ export default function Signup() {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [error, setError] = useState(null)
+  const [isChecked, setIsChecked] = useState(false)
+
 
 
 
@@ -59,6 +62,16 @@ export default function Signup() {
         <label htmlFor="password" className="label">Confirmar Senha:</label>
         <input type="password" className="form-input" placeholder="Confirmar senha" required onChange={(e) => setPasswordConfirmation(e.target.value)} />
         {error && <span className="text-danger">{error?.message}</span>}
+
+        <Toggle
+          checked={isChecked}
+          size="default"
+          disabled={false}
+          onChange={() => setIsChecked(!isChecked)}
+          offstyle="btn-danger"
+          onstyle="btn-success"
+          text={"Aceito os termos e condicoes"}
+        />
         <button className="btn-green" type="button" onClick={() => handleSignup()}>Sign Up</button>
         <p className="text-after">Ja tem um conta? <Link href="/login"><a>Entrar</a></Link></p>
       </form>

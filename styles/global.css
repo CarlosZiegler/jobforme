@@ -279,7 +279,7 @@ a, a:link, a:visited {
   flex-direction: column;
   margin:30px auto;
   width: 90%;
-  max-width: 450px;
+  max-width:400px;
 }
 .btn-primary{
   color: #fff;
@@ -314,6 +314,7 @@ a, a:link, a:visited {
   align-items: center;
   margin:30px auto;
   max-width: 600px;
+  padding:30px 0;
 }
 
 .partner-title{
@@ -361,7 +362,7 @@ a, a:link, a:visited {
   justify-content: center;
   width:90%;
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 350px;
   min-height: 55vh;
 }
 .btn-green{
@@ -429,7 +430,7 @@ a, a:link, a:visited {
   width:90%;
   margin: 0 auto;
   min-height: 60vh;
-  max-width: 500px;
+  max-width: 350px;
 }
 .signup-form > button{
   margin-top: 10px;
@@ -478,6 +479,7 @@ a, a:link, a:visited {
 /* Toggle */
 .toggle{
   margin-bottom:30px;
+  max-width: 350px;
 }
 
 hr {
