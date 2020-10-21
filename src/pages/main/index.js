@@ -62,15 +62,6 @@ export default function Main() {
     }
   }
 
-  const findOrders = () => {
-    const result = vacancies.filter(order => order._id.includes(findField) || order.tableId?.number.includes(findField))
-    return setShowVacancies(result)
-  }
-
-  useEffect(() => {
-    findOrders()
-  }, [findField])
-
   if (!isReady || !token || !user) return null
 
   return (<>
@@ -95,7 +86,7 @@ export default function Main() {
           </Link>}
         </div>
       </>}
-      {/* {orders && <Orders orders={showOrders} />} */}
+      {/* {vacancys && <vacancys vacancys={showvacancys} />} */}
       <div className="searchbar">
         {user?.role === 'company' && <>
           <div className="jobs-container">

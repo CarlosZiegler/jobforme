@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from "@services/Api";
 import Navbar from '@components/Navbar'
 import SearchBar from '@components/SearchBar'
 import CardJobs from '@components/CardJobs'
@@ -14,6 +15,31 @@ export default function Vacancies() {
   const [searchData, setSearchData] = useState('')
   const [error, setError] = useState(null)
 
+  const findVacancies = async () => {
+    // TODO call api with search params
+    try {
+      const { data } = await api.get(`/vacancies?search=${findField}`);
+      if (data?.hasOwnProperty('error')) {
+        return setError(data.error)
+      }
+      return setShowJobs(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getAllVacancies = async () => {
+    // TODO call api with search params
+    try {
+      const { data } = await api.get(`/vacancies`);
+      if (data?.hasOwnProperty('error')) {
+        return setError(data.error)
+      }
+      return setShowJobs(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const findJobs = () => {
     setShowJobs([])
@@ -35,6 +61,10 @@ export default function Vacancies() {
     }
     ])
   }
+
+  useEffect(() => {
+    getAllVacancies();
+  }, [])
 
   return (<>
     <Navbar />
