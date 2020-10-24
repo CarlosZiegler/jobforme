@@ -3,6 +3,7 @@ import Router from 'next/router';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { userLogout } from '@services/auth'
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -28,12 +29,7 @@ export default function SimpleMenu() {
   }, [isReady])
 
   const handleLogout = async () => {
-    try {
-      localStorage.clear()
-      Router.push('/login')
-    } catch (error) {
-      console.log(error)
-    }
+    userLogout()
   }
 
   return (

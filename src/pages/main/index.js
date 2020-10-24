@@ -23,7 +23,6 @@ export default function Main() {
   }, [])
 
   useEffect(() => {
-
     setToken(localStorage?.getItem('token'))
   }, [isReady])
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Link from 'next/link'
 import api from "@services/Api";
+import { userSignup } from '@services/auth'
 
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
@@ -18,24 +19,27 @@ export default function Signup() {
   const [error, setError] = useState(null)
   const [isChecked, setIsChecked] = useState(false)
 
+  useEffect(() => {
 
+    if (password.toLocaleLowerCase() !== passwordConfirmation.toLocaleLowerCase()) {
+      setError({ message: "Senhas não sao identicas, por favor verifique sua senha!" })
+    }
+    if (password.toLocaleLowerCase() === passwordConfirmation.toLocaleLowerCase()) setError(null)
+  }, [passwordConfirmation])
 
 
   const handleSignup = async () => {
-
     try {
       if (password === passwordConfirmation) {
-        const { data } = await api.post("/signup", {
+        const result = await userSignup({
           displayName, email, password, role
-        });
-        if (data?.hasOwnProperty('error')) {
-          return setError(data.error)
+        })
+        if (result) {
+          return Router.push('/login')
         }
-        console.log('aqui')
-        return Router.push('/login')
+        return setError(result)
       }
-      console.log(error)
-      setError({ message: "Senhas não sao identicas, por favor verifique sua senha!" })
+      return setError({ message: "Senhas não sao identicas, por favor verifique sua senha!" })
 
     } catch (error) {
       console.log(error)
