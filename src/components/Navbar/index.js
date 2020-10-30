@@ -1,10 +1,9 @@
-import React from "react";
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 
-import MenuButton from '@components/MenuButton'
+import MenuButton from '@components/MenuButton';
 
 function Navbar() {
-
   return (
     <header className="navbar">
       <Link href="/">

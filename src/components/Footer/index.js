@@ -8,7 +8,7 @@ function Footer() {
       </a>
       <p className="footer-container">
         © Site do Bem 2020
-        </p>
+      </p>
     </footer>
   );
 }

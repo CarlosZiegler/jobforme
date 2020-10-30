@@ -1,42 +1,42 @@
 import Router from 'next/router';
-import api from "@services/Api";
+import api from '@services/Api';
 
 export const userSignup = async (newUserData) => {
   try {
-    const { data } = await api.post("/signup", newUserData);
+    const { data } = await api.post('/signup', newUserData);
     if (data?.hasOwnProperty('error')) {
-      return data.error
+      return data.error;
     }
-    return data
+    return data;
   } catch (error) {
-    console.log(error)
-    return { error }
+    console.log(error);
+    return { error };
   }
-}
+};
 
 export const userLogin = async (email, password) => {
   try {
-    const { data } = await api.post("/login", {
-      email, password
+    const { data } = await api.post('/login', {
+      email, password,
     });
     if (data?.hasOwnProperty('error')) {
-      return data.error
+      return data.error;
     }
-    localStorage.clear()
-    localStorage.setItem('token', data?.token)
-    return true
+    localStorage.clear();
+    localStorage.setItem('token', data?.token);
+    return true;
   } catch (error) {
-    console.log(error)
-    return error
+    console.log(error);
+    return error;
   }
-}
+};
 
 export const userLogout = async () => {
   try {
-    localStorage.clear()
-    Router.push('/login')
+    localStorage.clear();
+    Router.push('/login');
   } catch (error) {
-    console.log(error)
-    return { error }
+    console.log(error);
+    return { error };
   }
-}
+};
