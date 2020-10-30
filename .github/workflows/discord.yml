@@ -1,0 +1,18 @@
+name: Notification on push
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        DISCORD_USERNAME: OSS 117
+      uses: Ilshidur/action-discord@master
+      with:
+        args: 'A new commit has been pushed to jobforme'
