@@ -15,6 +15,5 @@ jobs:
         DISCORD_USERNAME: Github Site do Bem
       uses: Ilshidur/action-discord@master
       with:
-        args: The ${{ github.event_name }} event triggered first step in {{ EVENT_PAYLOAD.repository.full_name }}.
+        args: {{ EVENT_PAYLOAD.sender.avatar_url }} create event ${{ github.event_name }} event triggered first step in {{ EVENT_PAYLOAD.repository.full_name }}.
         color: "#FFD600"
-        args: {{ EVENT_PAYLOAD.sender.avatar_url }}
