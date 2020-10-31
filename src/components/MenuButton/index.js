@@ -1,5 +1,4 @@
 import React from 'react';
-import Router from 'next/router';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,7 +11,7 @@ export default function SimpleMenu() {
   const [isReady, setIsReady] = React.useState(false);
   const [token, setToken] = React.useState(null);
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -21,11 +20,11 @@ export default function SimpleMenu() {
   };
 
   React.useEffect(() => {
-    setIsReady((isReady) => (isReady = true));
+    setIsReady(true);
   }, []);
 
   React.useEffect(() => {
-    if (isReady != false) {
+    if (isReady !== false) {
       setToken(localStorage.getItem('token'));
     }
   }, [isReady]);
@@ -78,7 +77,7 @@ export default function SimpleMenu() {
               </a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a className="menu-item" onClick={handleLogout}>
+              <a href="#sair" className="menu-item" onClick={handleLogout}>
                 Logout
               </a>
             </MenuItem>

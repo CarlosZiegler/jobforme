@@ -1,6 +1,8 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import Link from 'next/link';
 
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
@@ -15,6 +17,23 @@ export default function Main() {
   const [findField, setFindField] = useState('');
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
+
+  const getUserProfile = async () => {
+    try {
+      if (token) {
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const { data } = await api.get('/user', config);
+        if (data?.hasOwnProperty('error')) {
+          return setError(data.error);
+        }
+        setUser(data);
+      }
+    } catch (err) {
+      // console.log(err);
+    }
+  };
 
   useEffect(() => {
     setIsReady(true);
@@ -36,33 +55,14 @@ export default function Main() {
 
   useEffect(() => {
     if (user != null && user?.role === 'company') {
-      console.log(user);
+      // console.log(user);
       setVacancies(user.vacancies);
     }
   }, [user]);
-
-  const getUserProfile = async () => {
-    try {
-      if (token) {
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        const { data } = await api.get('/user', config);
-        if (data?.hasOwnProperty('error')) {
-          return setError(data.error);
-        }
-        setUser(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const findOrders = () => {
     const result = vacancies.filter(
-      (order) =>
-        order._id.includes(findField) ||
-        order.tableId?.number.includes(findField)
+      // eslint-disable-next-line comma-dangle
+      order => order?._id.includes(findField) || order.tableId?.number.includes(findField)
     );
     return setShowVacancies(result);
   };
@@ -91,18 +91,19 @@ export default function Main() {
 
               {user?.role === 'professional' && (
                 <>
-                  <Link href="/profile">
-                    <a className="options-item">Perfil Profissional</a>
-                  </Link>
-                  <Link href="/vagas">
-                    <a className="options-item">Ir para Vagas</a>
-                  </Link>
+                  <a href="/profile" className="options-item">
+                    Perfil Profissional
+                  </a>
+
+                  <a href="/vagas" className="options-item">
+                    Ir para Vagas
+                  </a>
                 </>
               )}
               {user?.role === 'company' && (
-                <Link href="/adicionar-vagas">
-                  <a className="options-item">Adicionar Vaga</a>
-                </Link>
+                <a href="/adicionar-vagas" className="options-item">
+                  Adicionar Vaga
+                </a>
               )}
             </div>
           </>
@@ -116,8 +117,8 @@ export default function Main() {
               <div className="jobs-container">
                 {vacancies && (
                   <>
-                    {vacancies.map((vacancy) => (
-                      <CardJobs key={vacancy._id} job={vacancy} />
+                    {vacancies.map(vacancy => (
+                      <CardJobs key={vacancy?._id} job={vacancy} />
                     ))}
                   </>
                 )}

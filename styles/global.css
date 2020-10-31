@@ -250,8 +250,6 @@ a:visited {
     margin: 0 auto;
 }
 
-.navbar :nth-child(1) {}
-
 .btn-menu {
     color: #000000;
     border: 1px solid #000000 !important;

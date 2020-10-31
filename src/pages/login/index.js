@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import { userLogin } from '@services/auth';
 
-import api from '@services/Api';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 
 import loginImg from '@assets/imgLogin.svg';
 
-export default function Login(props) {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -39,8 +39,9 @@ export default function Login(props) {
             className="form-input"
             placeholder="Email"
             required
-            onChange={(e) => setEmail(e.target.value.toLowerCase())}
+            onChange={e => setEmail(e.target.value.toLowerCase())}
           />
+
           <label className="label" htmlFor="senha">
             Senha:
           </label>
@@ -50,18 +51,15 @@ export default function Login(props) {
             className="form-input"
             placeholder="Password"
             required
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
+
           {error && <span className="text-danger">{error?.message}</span>}
-          <button
-            className="btn-green"
-            type="button"
-            onClick={() => handleLogin()}
-          >
+          <button className="btn-green" type="button" onClick={() => handleLogin()}>
             LOGIN
           </button>
           <p className="text-after">
-            Don't have an account?
+            Don&#39;t have an account?
             <Link href="/signup">Signup</Link>
           </p>
         </form>

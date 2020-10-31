@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 

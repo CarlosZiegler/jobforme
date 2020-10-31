@@ -7,7 +7,9 @@ function CardJobs({ job }) {
     <div className="job-card">
       <span className="job-card-location">{location}</span>
       <p className="job-card-title">{title}</p>
-      <a className="btn-yellow" href={`/job/${_id}`}>Detalhes</a>
+      <a className="btn-yellow" href={`/job/${_id}`}>
+        Detalhes
+      </a>
     </div>
   );
 }

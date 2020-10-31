@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable comma-dangle */
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import Link from 'next/link';
 
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
@@ -22,6 +23,37 @@ export default function Profile() {
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
+  // eslint-disable-next-line consistent-return
+  const getUserProfile = tokenGet => {
+    try {
+      if (tokenGet) {
+        const config = {
+          headers: { Authorization: `Bearer ${tokenGet}` },
+        };
+        const { data } = api.get('/user', config);
+        if (data?.hasOwnProperty('error')) {
+          return setError(data.error);
+        }
+        setUser(data);
+        setProfessional(data.professionalProfile);
+      }
+    } catch (err) {
+      // console.log(err);
+    }
+  };
+
+  const getProfessionalProfile = async professionalData => {
+    try {
+      setLinkedIn(professionalData?.contact?.linkedIn || '');
+      setLink(professionalData?.contact?.link || '');
+      setLocation(professionalData?.location || '');
+      setPosition(professionalData?.position || '');
+      setIsChecked(professionalData?.isActive || false);
+    } catch (err) {
+      // console.log(err);
+    }
+  };
+
   useEffect(() => {
     setIsReady(true);
   }, []);
@@ -31,11 +63,11 @@ export default function Profile() {
   }, [isReady]);
 
   useEffect(() => {
-    getUserProfile();
+    getUserProfile(token);
   }, [token]);
 
   useEffect(() => {
-    getProfessionalProfile();
+    getProfessionalProfile(professional);
   }, [professional]);
 
   useEffect(() => {
@@ -44,34 +76,6 @@ export default function Profile() {
     }
   }, [isReady, token]);
 
-  const getUserProfile = async () => {
-    try {
-      if (token) {
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        const { data } = await api.get('/user', config);
-        if (data?.hasOwnProperty('error')) {
-          return setError(data.error);
-        }
-        setUser(data);
-        setProfessional(data.professionalProfile);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getProfessionalProfile = async () => {
-    try {
-      setLinkedIn(professional?.contact?.linkedIn || '');
-      setLink(professional?.contact?.link || '');
-      setLocation(professional?.location || '');
-      setPosition(professional?.position || '');
-      setIsChecked(professional?.isActive || false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const handleCancelUpdates = () => {
     getUserProfile();
     setIsDisabled(!isDisabled);
@@ -87,35 +91,47 @@ export default function Profile() {
         let data;
 
         if (user.professionalProfile !== null) {
-          data = await api.put(`/professional/update/${professional._id}`, {
-            position,
-            location,
-            isActive: isChecked,
-            contact: {
-              link,
-              linkedIn,
+          data = await api.put(
+            `/professional/update/${professional?._id}`,
+            {
+              position,
+              location,
+              isActive: isChecked,
+              contact: {
+                link,
+                linkedIn,
+              },
             },
-          }, config);
+            config
+          );
         } else {
-          data = await api.post('/professional/create', {
-            position,
-            location,
-            isActive: isChecked,
-            contact: {
-              link,
-              linkedIn,
+          data = await api.post(
+            '/professional/create',
+            {
+              position,
+              location,
+              isActive: isChecked,
+              contact: {
+                link,
+                linkedIn,
+              },
             },
-          }, config);
-          const result = await api.put('/user/update', {
-            professionalProfile: data.data._id,
-          }, config);
+            config
+          );
+          await api.put(
+            '/user/update',
+            {
+              professionalProfile: data.data?._id,
+            },
+            config
+          );
         }
 
         getUserProfile();
         setIsDisabled(!isDisabled);
       }
-    } catch (error) {
-      setError(error);
+    } catch (err) {
+      setError(err);
     }
   };
 
@@ -130,45 +146,53 @@ export default function Profile() {
           <>
             <h1>Perfil Profissional</h1>
             <form className="professional-container">
-              <label className="label">Cargo</label>
+              <label className="label" htmlFor="position">
+                Cargo
+              </label>
               <input
                 className="professional-input"
                 type="text"
                 id="position"
                 value={position}
-                onChange={(e) => setPosition(e.target.value)}
+                onChange={e => setPosition(e.target.value)}
                 name="position"
                 required
                 disabled={isDisabled ? 'disabled' : ''}
               />
-              <label className="label">Localizaçao</label>
+              <label className="label" htmlFor="location">
+                Localizaçao
+              </label>
               <input
                 className="professional-input"
                 type="text"
                 id="location"
                 value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={e => setLocation(e.target.value)}
                 name="location"
                 required
                 disabled={isDisabled ? 'disabled' : ''}
               />
-              <label className="label">Link</label>
+              <label className="label" htmlFor="link">
+                Link
+              </label>
               <input
                 className="professional-input"
                 type="text"
                 id="link"
                 value={link}
-                onChange={(e) => setLink(e.target.value)}
+                onChange={e => setLink(e.target.value)}
                 name="link"
                 disabled={isDisabled ? 'disabled' : ''}
               />
-              <label className="label">Linkedin</label>
+              <label className="label" htmlFor="linkedin">
+                Linkedin
+              </label>
               <input
                 className="professional-input"
                 type="text"
                 id="linkedin"
                 value={linkedIn}
-                onChange={(e) => setLinkedIn(e.target.value)}
+                onChange={e => setLinkedIn(e.target.value)}
                 name="linkedin"
                 disabled={isDisabled ? 'disabled' : ''}
               />
@@ -185,15 +209,34 @@ export default function Profile() {
               text={isChecked ? 'Estou procurando emprego' : 'Não estou procurando emprego'}
             />
             <div className="btn-group">
-              {isDisabled && <button type="button" className="btn-green" onClick={() => setIsDisabled(!isDisabled)}>Editar Perfil Profissional</button>}
+              {isDisabled && (
+                <button
+                  type="button"
+                  className="btn-green"
+                  onClick={() => setIsDisabled(!isDisabled)}
+                >
+                  Editar Perfil Profissional
+                </button>
+              )}
               {isDisabled === false && (
                 <>
-                  <button type="button" className="btn-red" onClick={() => handleCancelUpdates()}>Cancel</button>
-                  <button type="button" className="btn-green" onClick={() => createOrUpdateUserProfessionalProfile()}>Update</button>
+                  <button type="button" className="btn-red" onClick={() => handleCancelUpdates()}>
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-green"
+                    onClick={() => createOrUpdateUserProfessionalProfile()}
+                  >
+                    Update
+                  </button>
                 </>
               )}
             </div>
-            <Link href="/main"><a className="btn-primary">Voltar</a></Link>
+
+            <a href="/main" className="btn-primary">
+              Voltar
+            </a>
           </>
         )}
         <div />
@@ -201,7 +244,5 @@ export default function Profile() {
       </div>
       <Footer />
     </>
-
-
   );
 }

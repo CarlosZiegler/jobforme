@@ -1,8 +1,9 @@
+/* eslint-disable consistent-return */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 
 import Link from 'next/link';
-import api from '@services/Api';
 import { userSignup } from '@services/auth';
 
 import Navbar from '@components/Navbar';
@@ -21,18 +22,13 @@ export default function Signup() {
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    if (
-      password.toLocaleLowerCase() !== passwordConfirmation.toLocaleLowerCase()
-    ) {
+    if (password.toLocaleLowerCase() !== passwordConfirmation.toLocaleLowerCase()) {
       setError({
         message: 'Senhas não sao identicas, por favor verifique sua senha!',
       });
     }
-    if (
-      password.toLocaleLowerCase() === passwordConfirmation.toLocaleLowerCase()
-    )
-      setError(null);
-  }, [passwordConfirmation]);
+    if (password.toLocaleLowerCase() === passwordConfirmation.toLocaleLowerCase()) setError(null);
+  }, [passwordConfirmation, password]);
 
   const handleSignup = async () => {
     try {
@@ -51,8 +47,8 @@ export default function Signup() {
       return setError({
         message: 'Senhas não sao identicas, por favor verifique sua senha!',
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      // console.log(err);
     }
   };
 
@@ -72,7 +68,7 @@ export default function Signup() {
             id="displayname"
             placeholder="Display Name"
             required
-            onChange={(e) => setDisplayName(e.target.value)}
+            onChange={e => setDisplayName(e.target.value)}
           />
           <label htmlFor="role" className="label">
             Perfil:
@@ -82,7 +78,7 @@ export default function Signup() {
             className="form-input"
             id="role"
             required
-            onChange={(e) => setRole(e.target.value.toLowerCase())}
+            onChange={e => setRole(e.target.value.toLowerCase())}
           >
             <option value="professional">Estou procurando emprego</option>
             <option value="company">Quero contratar profissionais</option>
@@ -96,7 +92,7 @@ export default function Signup() {
             id="email"
             placeholder="Email"
             required
-            onChange={(e) => setEmail(e.target.value.toLowerCase())}
+            onChange={e => setEmail(e.target.value.toLowerCase())}
           />
           <label htmlFor="password" className="label">
             Senha:
@@ -106,7 +102,7 @@ export default function Signup() {
             className="form-input"
             placeholder="Senha"
             required
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
           <label htmlFor="password" className="label">
             Confirmar Senha:
@@ -116,7 +112,7 @@ export default function Signup() {
             className="form-input"
             placeholder="Confirmar senha"
             required
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            onChange={e => setPasswordConfirmation(e.target.value)}
           />
           {error && <span className="text-danger">{error?.message}</span>}
 
@@ -129,18 +125,12 @@ export default function Signup() {
             onstyle="btn-success"
             text="Aceito os termos e condicoes"
           />
-          <button
-            className="btn-green"
-            type="button"
-            onClick={() => handleSignup()}
-          >
+          <button className="btn-green" type="button" onClick={() => handleSignup()}>
             Sign Up
           </button>
           <p className="text-after">
             Ja tem um conta?
-            <Link href="/login">
-              <a>Entrar</a>
-            </Link>
+            <Link href="/login">Entrar</Link>
           </p>
         </form>
       </div>

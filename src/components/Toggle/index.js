@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default function Toggle(props) {
   const {
     size = 'default',
@@ -15,9 +14,10 @@ export default function Toggle(props) {
   const displayStyle = checked ? onstyle : offstyle;
   return (
     <div className="toggle">
-      <label className="control-label">
+      <label className="control-label" htmlFor="toogle">
         <span className={`${size} switch-wrapper`}>
           <input
+            id="toogle"
             type="checkbox"
             checked={checked}
             disabled={disabled}
@@ -27,9 +27,7 @@ export default function Toggle(props) {
             <span className="switch-handle" />
           </span>
         </span>
-        <span className="toggle-text">
-          {text}
-        </span>
+        <span className="toggle-text">{text}</span>
       </label>
     </div>
   );
