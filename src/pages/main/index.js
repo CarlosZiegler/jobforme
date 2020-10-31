@@ -60,7 +60,9 @@ export default function Main() {
 
   const findOrders = () => {
     const result = vacancies.filter(
-      order => order._id.includes(findField) || order.tableId?.number.includes(findField)
+      (order) =>
+        order._id.includes(findField) ||
+        order.tableId?.number.includes(findField)
     );
     return setShowVacancies(result);
   };
@@ -86,6 +88,7 @@ export default function Main() {
               <a href="/profile" className="options-item">
                 Meu Perfil
               </a>
+
               {user?.role === 'professional' && (
                 <>
                   <Link href="/profile">
@@ -104,14 +107,16 @@ export default function Main() {
             </div>
           </>
         )}
-        {/* {orders && <Orders orders={showOrders} />} */}
+
+        {/* {vacancys && <vacancys vacancys={showvacancys} />} */}
+
         <div className="searchbar">
           {user?.role === 'company' && (
             <>
               <div className="jobs-container">
                 {vacancies && (
                   <>
-                    {vacancies.map(vacancy => (
+                    {vacancies.map((vacancy) => (
                       <CardJobs key={vacancy._id} job={vacancy} />
                     ))}
                   </>

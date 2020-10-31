@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 
+import Link from 'next/link';
 import api from '@services/Api';
+import { userSignup } from '@services/auth';
 
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
+import Toggle from '@components/Toggle';
 
 import signupImg from '@assets/signupImg.svg';
 
@@ -15,12 +18,20 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [error, setError] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    if (password.toLocaleLowerCase() !== passwordConfirmation.toLocaleLowerCase()) {
-      setError({ message: 'Senhas não sao identicas, por favor verifique sua senha!' });
+    if (
+      password.toLocaleLowerCase() !== passwordConfirmation.toLocaleLowerCase()
+    ) {
+      setError({
+        message: 'Senhas não sao identicas, por favor verifique sua senha!',
+      });
     }
-    if (password.toLocaleLowerCase() === passwordConfirmation.toLocaleLowerCase()) setError(null);
+    if (
+      password.toLocaleLowerCase() === passwordConfirmation.toLocaleLowerCase()
+    )
+      setError(null);
   }, [passwordConfirmation]);
 
   const handleSignup = async () => {
@@ -37,7 +48,9 @@ export default function Signup() {
         }
         return setError(result);
       }
-      return setError({ message: 'Senhas não sao identicas, por favor verifique sua senha!' });
+      return setError({
+        message: 'Senhas não sao identicas, por favor verifique sua senha!',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +72,7 @@ export default function Signup() {
             id="displayname"
             placeholder="Display Name"
             required
-            onChange={e => setDisplayName(e.target.value)}
+            onChange={(e) => setDisplayName(e.target.value)}
           />
           <label htmlFor="role" className="label">
             Perfil:
@@ -69,7 +82,7 @@ export default function Signup() {
             className="form-input"
             id="role"
             required
-            onChange={e => setRole(e.target.value.toLowerCase())}
+            onChange={(e) => setRole(e.target.value.toLowerCase())}
           >
             <option value="professional">Estou procurando emprego</option>
             <option value="company">Quero contratar profissionais</option>
@@ -83,7 +96,7 @@ export default function Signup() {
             id="email"
             placeholder="Email"
             required
-            onChange={e => setEmail(e.target.value.toLowerCase())}
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
           />
           <label htmlFor="password" className="label">
             Senha:
@@ -93,7 +106,7 @@ export default function Signup() {
             className="form-input"
             placeholder="Senha"
             required
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <label htmlFor="password" className="label">
             Confirmar Senha:
@@ -103,15 +116,31 @@ export default function Signup() {
             className="form-input"
             placeholder="Confirmar senha"
             required
-            onChange={e => setPasswordConfirmation(e.target.value)}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
           {error && <span className="text-danger">{error?.message}</span>}
-          <button className="btn-green" type="button" onClick={() => handleSignup()}>
+
+          <Toggle
+            checked={isChecked}
+            size="default"
+            disabled={false}
+            onChange={() => setIsChecked(!isChecked)}
+            offstyle="btn-danger"
+            onstyle="btn-success"
+            text="Aceito os termos e condicoes"
+          />
+          <button
+            className="btn-green"
+            type="button"
+            onClick={() => handleSignup()}
+          >
             Sign Up
           </button>
           <p className="text-after">
             Ja tem um conta?
-            <a href="/login">Entrar</a>
+            <Link href="/login">
+              <a>Entrar</a>
+            </Link>
           </p>
         </form>
       </div>

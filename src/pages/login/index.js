@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
+import { userLogin } from '@services/auth';
 
 import api from '@services/Api';
 import Navbar from '@components/Navbar';
@@ -12,21 +13,13 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
   const handleLogin = async () => {
-    try {
-      const { data } = await api.post('/login', {
-        email,
-        password,
-      });
-      if (data?.hasOwnProperty('error')) {
-        return setError(data.error);
-      }
-      localStorage.clear();
-      localStorage.setItem('token', data?.token);
+    const result = await userLogin(email, password);
+    if (result) {
       Router.push('/main');
-    } catch (error) {
-      // console.log(error);
     }
+    setError(result);
   };
 
   return (
@@ -36,6 +29,7 @@ export default function Login(props) {
         <img src={loginImg} alt="" className="login-img" />
         <form className="login-form">
           <h1 className="no-margin text-navy">Bem vindo de volta!</h1>
+
           <label htmlFor="email" className="label">
             Email:
           </label>
@@ -45,7 +39,7 @@ export default function Login(props) {
             className="form-input"
             placeholder="Email"
             required
-            onChange={e => setEmail(e.target.value.toLowerCase())}
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
           />
           <label className="label" htmlFor="senha">
             Senha:
@@ -56,10 +50,14 @@ export default function Login(props) {
             className="form-input"
             placeholder="Password"
             required
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {error && <span className="text-danger">{error?.message}</span>}
-          <button className="btn-green" type="button" onClick={() => handleLogin()}>
+          <button
+            className="btn-green"
+            type="button"
+            onClick={() => handleLogin()}
+          >
             LOGIN
           </button>
           <p className="text-after">

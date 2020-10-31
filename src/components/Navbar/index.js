@@ -1,8 +1,10 @@
 import React from 'react';
+
 import Logo from '@components/Logo';
 
 import MenuButton from '@components/MenuButton';
 import { Container } from './styles';
+
 
 function Navbar() {
   return (

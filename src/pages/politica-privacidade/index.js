@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
 
 
-import Navbar from '@components/Navbar'
-import Footer from '@components/Footer'
+import Navbar from '@components/Navbar';
+import Footer from '@components/Footer';
 
 
 export default function Politica() {
-
-  return (<div className="content">
-    <Navbar />
-    <div className="main-content">
+  return (
+    <div className="content">
+      <Navbar />
+      <div className="main-content">
       Política Privacidade
       A sua privacidade é importante para nós. É política do sitedobem.org respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site sitedobem.org, e outros sites que possuímos e operamos.
 
@@ -77,8 +77,9 @@ export default function Politica() {
       Esperemos que esteja esclarecido e, como mencionado anteriormente, se houver algo que você não tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.
 
       Esta política é efetiva a partir de August/2020.
-    </div>
+      </div>
 
-    <Footer />
-  </div>);
+      <Footer />
+    </div>
+  );
 }

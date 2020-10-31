@@ -2,23 +2,12 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true,
-    "jest": true
+    "node": true
   },
-  "parser": "babel-eslint",
-  "extends": ["airbnb", "plugin:react/recommended", "eslint:recommended"],
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [
-          ["@assets", "./src/assets"],
-          ["@components", "./src/components"],
-          ["@services", "./src/services"],
-          ["@styles", "./styles"],
-          ["@utils", "./src/utils"]
-        ]
-      }
-    }
+  "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
     "ecmaFeatures": {
@@ -27,21 +16,13 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "prettier", "react-hooks"],
   "rules": {
+    "prettier/prettier": "error",
+    "react/prop-types": "ignore",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export": "off",
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ],
-    "react/prop-types": 0,
-    "react/jsx-indent": "off",
-    "indent": [2, 2],
-    "arrow-parens": "off",
-    "object-curly-newline": "off"
+    "react/jsx-key": "off",
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   }
 }
