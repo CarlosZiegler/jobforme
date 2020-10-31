@@ -1,40 +1,40 @@
 {
-	"name": "learn-starter",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"fix": "eslint . --ext .js --fix"
-	},
-	"dependencies": {
-		"@material-ui/core": "^4.11.0",
-		"axios": "^0.19.2",
-		"next": "9.4.2",
-		"react": "16.13.1",
-		"react-dom": "16.13.1",
-		"react-ga": "^2.7.0",
-		"react-lottie": "^1.2.3",
-		"react-router-dom": "^5.2.0",
-		"styled-components": "^5.1.1"
-	},
-	"devDependencies": {
-		"babel-eslint": "^10.1.0",
-		"babel-plugin-styled-components": "^1.10.7",
-		"eslint": "^7.1.0",
-		"eslint-config-airbnb": "^18.1.0",
-		"eslint-import-resolver-alias": "^1.1.2",
-		"eslint-plugin-import": "^2.20.2",
-		"eslint-plugin-jsx-a11y": "^6.2.3",
-		"eslint-plugin-react": "^7.20.0",
-		"eslint-plugin-react-hooks": "^4.0.2",
-		"next-images": "^1.4.1"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"airbnb"
-		]
-	}
+  "name": "Site do Bem",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "fix": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "axios": "^0.19.2",
+    "next": "9.4.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-ga": "^2.7.0",
+    "react-lottie": "^1.2.3",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-styled-components": "^1.10.7",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.2",
+    "next-images": "^1.4.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "airbnb"
+    ]
+  }
 }
