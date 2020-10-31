@@ -19,6 +19,11 @@ button {
     border: none;
 }
 
+input:focus,
+select:focus {
+    outline: none;
+}
+
 .content {
     max-width: 1260px;
     margin: 0 auto;

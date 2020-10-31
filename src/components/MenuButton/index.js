@@ -82,7 +82,7 @@ export default function SimpleMenu() {
               </a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a href="#sair" className="menu-item" onClick={handleLogout}>
+              <a className="menu-item" onClick={handleLogout}>
                 Logout
               </a>
             </MenuItem>

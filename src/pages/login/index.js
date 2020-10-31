@@ -64,9 +64,7 @@ export default function Login(props) {
           </button>
           <p className="text-after">
             Don't have an account?
-            <Link href="/signup">
-              <a>Signup</a>
-            </Link>
+            <Link href="/signup">Signup</Link>
           </p>
         </form>
       </div>

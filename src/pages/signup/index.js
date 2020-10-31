@@ -1,68 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import Link from 'next/link'
-import api from "@services/Api";
 
-import Navbar from '@components/Navbar'
-import Footer from '@components/Footer'
+import api from '@services/Api';
 
-import signupImg from '@assets/signupImg.svg'
+import Navbar from '@components/Navbar';
+import Footer from '@components/Footer';
+
+import signupImg from '@assets/signupImg.svg';
 
 export default function Signup() {
-  const [displayName, setDisplayName] = useState('')
-  const [email, setEmail] = useState('')
-  const [role, setRole] = useState('professional')
-  const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [error, setError] = useState(null)
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('professional');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [error, setError] = useState(null);
 
-
+  useEffect(() => {
+    if (password.toLocaleLowerCase() !== passwordConfirmation.toLocaleLowerCase()) {
+      setError({ message: 'Senhas não sao identicas, por favor verifique sua senha!' });
+    }
+    if (password.toLocaleLowerCase() === passwordConfirmation.toLocaleLowerCase()) setError(null);
+  }, [passwordConfirmation]);
 
   const handleSignup = async () => {
-
     try {
       if (password === passwordConfirmation) {
-        const { data } = await api.post("/signup", {
-          displayName, email, password, role
+        const result = await userSignup({
+          displayName,
+          email,
+          password,
+          role,
         });
-        if (data?.hasOwnProperty('error')) {
-          return setError(data.error)
+        if (result) {
+          return Router.push('/login');
         }
-        console.log('aqui')
-        return Router.push('/login')
+        return setError(result);
       }
-      console.log(error)
-      setError({ message: "Senhas não sao identicas, por favor verifique sua senha!" })
-
+      return setError({ message: 'Senhas não sao identicas, por favor verifique sua senha!' });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  return (<>
-    <Navbar />
-    <div className="main-content">
-      <img src={signupImg} alt="" className="login-img" />
-      <form className="signup-form">
-        <h1 className="no-margin text-navy">Inscrever-se</h1>
-        <label htmlFor="displayname" className="label">Nome de usuario:</label>
-        <input type="text" className="form-input" id="displayname" placeholder="Display Name" required onChange={(e) => setDisplayName(e.target.value)} />
-        <label htmlFor="role" className="label">Perfil:</label>
-        <select name="role" className="form-input" id="role" required onChange={(e) => setRole(e.target.value.toLowerCase())}>
-          <option value="professional">Estou procurando emprego</option>
-          <option value="company">Quero contratar profissionais</option>
-        </select>
-        <label htmlFor="email" className="label">Email:</label>
-        <input type="text" className="form-input" id="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
-        <label htmlFor="password" className="label">Senha:</label>
-        <input type="password" className="form-input" placeholder="Senha" required onChange={(e) => setPassword(e.target.value)} />
-        <label htmlFor="password" className="label">Confirmar Senha:</label>
-        <input type="password" className="form-input" placeholder="Confirmar senha" required onChange={(e) => setPasswordConfirmation(e.target.value)} />
-        {error && <span className="text-danger">{error?.message}</span>}
-        <button className="btn-green" type="button" onClick={() => handleSignup()}>Sign Up</button>
-        <p className="text-after">Ja tem um conta? <Link href="/login"><a>Entrar</a></Link></p>
-      </form>
-    </div>
-    <Footer />
-  </>);
+  return (
+    <>
+      <Navbar />
+      <div className="main-content">
+        <img src={signupImg} alt="" className="login-img" />
+        <form className="signup-form">
+          <h1 className="no-margin text-navy">Inscrever-se</h1>
+          <label htmlFor="displayname" className="label">
+            Nome de usuario:
+          </label>
+          <input
+            type="text"
+            className="form-input"
+            id="displayname"
+            placeholder="Display Name"
+            required
+            onChange={e => setDisplayName(e.target.value)}
+          />
+          <label htmlFor="role" className="label">
+            Perfil:
+          </label>
+          <select
+            name="role"
+            className="form-input"
+            id="role"
+            required
+            onChange={e => setRole(e.target.value.toLowerCase())}
+          >
+            <option value="professional">Estou procurando emprego</option>
+            <option value="company">Quero contratar profissionais</option>
+          </select>
+          <label htmlFor="email" className="label">
+            Email:
+          </label>
+          <input
+            type="text"
+            className="form-input"
+            id="email"
+            placeholder="Email"
+            required
+            onChange={e => setEmail(e.target.value.toLowerCase())}
+          />
+          <label htmlFor="password" className="label">
+            Senha:
+          </label>
+          <input
+            type="password"
+            className="form-input"
+            placeholder="Senha"
+            required
+            onChange={e => setPassword(e.target.value)}
+          />
+          <label htmlFor="password" className="label">
+            Confirmar Senha:
+          </label>
+          <input
+            type="password"
+            className="form-input"
+            placeholder="Confirmar senha"
+            required
+            onChange={e => setPasswordConfirmation(e.target.value)}
+          />
+          {error && <span className="text-danger">{error?.message}</span>}
+          <button className="btn-green" type="button" onClick={() => handleSignup()}>
+            Sign Up
+          </button>
+          <p className="text-after">
+            Ja tem um conta?
+            <a href="/login">Entrar</a>
+          </p>
+        </form>
+      </div>
+      <Footer />
+    </>
+  );
 }
