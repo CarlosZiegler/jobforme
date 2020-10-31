@@ -27,8 +27,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "prettier", "react-hooks"],
   "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-key": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
@@ -42,6 +44,11 @@
     "react/jsx-indent": "off",
     "indent": [2, 2],
     "arrow-parens": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+
+
+
   }
 }

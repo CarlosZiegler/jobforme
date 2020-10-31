@@ -1,19 +1,23 @@
 import React from 'react';
-import Link from 'next/link';
+
+import Logo from '@components/Logo';
 
 import MenuButton from '@components/MenuButton';
+import { Container } from './styles';
 
 function Navbar() {
   return (
-    <header className="navbar">
-      <Link href="/">
-        <a>
-          <h2>SiteDoBem</h2>
+    <Container>
+      <nav className="navbar navbar-light">
+        <a href="/">
+          <Logo />
+          SiteDoBem
         </a>
-      </Link>
-
-      <MenuButton />
-    </header>
+        <div className="navbar-text">
+          <MenuButton />
+        </div>
+      </nav>
+    </Container>
   );
 }
 

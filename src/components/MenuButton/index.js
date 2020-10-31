@@ -1,16 +1,17 @@
 import React from 'react';
-import Router from 'next/router';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { userLogout } from '@services/auth';
+
+import { Container } from './styles';
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isReady, setIsReady] = React.useState(false);
   const [token, setToken] = React.useState(null);
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -19,11 +20,11 @@ export default function SimpleMenu() {
   };
 
   React.useEffect(() => {
-    setIsReady((isReady) => isReady = true);
+    setIsReady(true);
   }, []);
 
   React.useEffect(() => {
-    if (isReady != false) {
+    if (isReady !== false) {
       setToken(localStorage.getItem('token'));
     }
   }, [isReady]);
@@ -33,9 +34,13 @@ export default function SimpleMenu() {
   };
 
   return (
-
-    <div>
-      <Button className="btn-menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+    <Container>
+      <Button
+        className="btn-menu"
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
         <span>Menu</span>
       </Button>
       <Menu
@@ -46,30 +51,39 @@ export default function SimpleMenu() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <a href="/" className="menu-item">Home</a>
+          <a href="/" className="menu-item">
+            Home
+          </a>
         </MenuItem>
         {!token && (
           <div>
             <MenuItem onClick={handleClose}>
-              <a href="/login" className="menu-item">Login</a>
+              <a href="/login" className="menu-item">
+                Login
+              </a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a href="/signup" className="menu-item">Signup</a>
+              <a href="/signup" className="menu-item">
+                Signup
+              </a>
             </MenuItem>
           </div>
         )}
         {token && (
           <div>
             <MenuItem onClick={handleClose}>
-              <a href="/main" className="menu-item">Main</a>
+              <a href="/main" className="menu-item">
+                Dashboard
+              </a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a className="menu-item" onClick={handleLogout}>Logout</a>
+              <a href="#sair" className="menu-item" onClick={handleLogout}>
+                Logout
+              </a>
             </MenuItem>
           </div>
         )}
-
       </Menu>
-    </div>
+    </Container>
   );
 }
