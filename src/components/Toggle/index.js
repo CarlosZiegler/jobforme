@@ -3,16 +3,16 @@ import React from 'react';
 
 export default function Toggle(props) {
   const {
-    size = "default",
+    size = 'default',
     checked,
     disabled,
     onChange,
-    offstyle = "btn-danger",
-    onstyle = "btn-success",
-    text
+    offstyle = 'btn-danger',
+    onstyle = 'btn-success',
+    text,
   } = props;
 
-  let displayStyle = checked ? onstyle : offstyle;
+  const displayStyle = checked ? onstyle : offstyle;
   return (
     <div className="toggle">
       <label className="control-label">

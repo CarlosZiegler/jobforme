@@ -6,16 +6,35 @@
     "jest": true
   },
   "parser": "babel-eslint",
-  "extends": ["airbnb", "plugin:react/recommended", "eslint:recommended"],
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "eslint:recommended"
+  ],
   "settings": {
     "import/resolver": {
       "alias": {
         "map": [
-          ["@assets", "./src/assets"],
-          ["@components", "./src/components"],
-          ["@services", "./src/services"],
-          ["@styles", "./styles"],
-          ["@utils", "./src/utils"]
+          [
+            "@assets",
+            "./src/assets"
+          ],
+          [
+            "@components",
+            "./src/components"
+          ],
+          [
+            "@services",
+            "./src/services"
+          ],
+          [
+            "@styles",
+            "./styles"
+          ],
+          [
+            "@utils",
+            "./src/utils"
+          ]
         ]
       }
     }
@@ -27,20 +46,34 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-console": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "consistent-return": "off",
+    "no-underscore-dangle": "off",
+    "react/no-unescaped-entities": "off",
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     ],
     "react/prop-types": 0,
     "react/jsx-indent": "off",
-    "indent": [2, 2],
+    "indent": [
+      2,
+      2
+    ],
     "arrow-parens": "off",
     "object-curly-newline": "off"
   }
