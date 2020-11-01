@@ -13,7 +13,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-
   const handleLogin = async () => {
     const result = await userLogin(email, password);
     if (result) {
@@ -28,15 +27,37 @@ export default function Login() {
         <img src={loginImg} alt="" className="login-img" />
         <form className="login-form">
           <h1 className="no-margin text-navy">Bem vindo de volta!</h1>
-          <label htmlFor="email" className="label">Email:</label>
-          <input type="text" id="email" className="form-input" placeholder="Email" required onChange={(e) => setEmail(e.target.value.toLowerCase())} />
-          <label htmlFor="senha" className="label">Senha:</label>
-          <input type="password" id="senha" className="form-input" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
+          <label htmlFor="email" className="label">
+            Email:
+          </label>
+          <input
+            type="text"
+            id="email"
+            className="form-input"
+            placeholder="Email"
+            required
+            onChange={e => setEmail(e.target.value.toLowerCase())}
+          />
+          <label htmlFor="senha" className="label">
+            Senha:
+          </label>
+          <input
+            type="password"
+            id="senha"
+            className="form-input"
+            placeholder="Password"
+            required
+            onChange={e => setPassword(e.target.value)}
+          />
           {error && <span className="text-danger">{error?.message}</span>}
-          <button className="btn-green" type="button" onClick={() => handleLogin()}>LOGIN</button>
+          <button className="btn-green" type="button" onClick={() => handleLogin()}>
+            LOGIN
+          </button>
           <p className="text-after">
-Don't have an account?
-            <Link href="/signup"><a>Signup</a></Link>
+            Don't have an account?
+            <Link href="/signup">
+              <a>Signup</a>
+            </Link>
           </p>
         </form>
       </div>
