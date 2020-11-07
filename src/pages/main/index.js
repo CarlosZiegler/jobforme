@@ -7,7 +7,6 @@ import Footer from '@components/Footer';
 import CardJobs from '@components/CardJobs';
 import api from '@services/Api';
 
-
 export default function Main() {
   const [isReady, setIsReady] = useState(false);
   const [token, setToken] = useState(null);
@@ -68,11 +67,13 @@ export default function Main() {
         {user && (
           <>
             <h1>
-Ola
+              Ola
               {user.displayName}
             </h1>
             <div className="options-container">
-              <a href="/profile" className="options-item">Meu Perfil</a>
+              <a href="/profile" className="options-item">
+                Meu Perfil
+              </a>
               {user?.role === 'professional' && (
                 <>
                   <Link href="/profile">
@@ -84,7 +85,7 @@ Ola
                 </>
               )}
               {user?.role === 'company' && (
-                <Link href="/adicionar-vagas">
+                <Link href="/add-vacancy">
                   <a className="options-item">Adicionar Vaga</a>
                 </Link>
               )}
@@ -98,10 +99,11 @@ Ola
               <div className="jobs-container">
                 {vacancies && (
                   <>
-                    {vacancies.map(vacancy => <CardJobs key={vacancy._id} job={vacancy} />)}
+                    {vacancies.map(vacancy => (
+                      <CardJobs key={vacancy._id} job={vacancy} />
+                    ))}
                   </>
                 )}
-
               </div>
             </>
           )}
@@ -109,7 +111,5 @@ Ola
       </div>
       <Footer />
     </>
-
-
   );
 }

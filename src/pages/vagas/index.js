@@ -94,9 +94,7 @@ export default function Vacancies() {
                 {`${searchData}`}
               </p>
               <div className="result-container">
-                {showJobs.map(job => (
-                  <CardJobs key={job._id} job={job} />
-                ))}
+                {showJobs.map((job, index) => index < 5 && <CardJobs key={job._id} job={job} />)}
               </div>
             </>
           )}
