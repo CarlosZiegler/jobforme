@@ -12,8 +12,6 @@ export default function Main() {
   const [isReady, setIsReady] = useState(false);
   const [token, setToken] = useState(null);
   const [vacancies, setVacancies] = useState([]);
-  const [showVacancies, setShowVacancies] = useState([]);
-  const [findField, setFindField] = useState('');
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -21,6 +19,23 @@ export default function Main() {
     setIsReady(true);
   }, []);
 
+  const getUserProfile = async () => {
+    try {
+      if (token) {
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const { data } = await api.get('/user', config);
+        if (data?.hasOwnProperty('error')) {
+          return setError(data.error);
+        }
+        setUser(data);
+      }
+    } catch (err) {
+      console.log(err);
+      setError(err);
+    }
+  };
   useEffect(() => {
     setToken(localStorage?.getItem('token'));
   }, [isReady]);
@@ -42,24 +57,8 @@ export default function Main() {
     }
   }, [user]);
 
-  const getUserProfile = async () => {
-    try {
-      if (token) {
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        const { data } = await api.get('/user', config);
-        if (data?.hasOwnProperty('error')) {
-          return setError(data.error);
-        }
-        setUser(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   if (!isReady || !token || !user) return null;
+  if (error) console.log(error);
 
   return (
     <>
