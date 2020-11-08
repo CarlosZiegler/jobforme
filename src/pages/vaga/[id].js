@@ -4,34 +4,34 @@ import React from 'react';
 import api from '@services/Api';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
-
-import searchImg from '@assets/undraw_web_search.svg';
+import Link from 'next/link';
 
 export default function Vacancy({ vacancy }) {
   console.log(vacancy);
   return (
     <>
       <Navbar />
-      <div className="main-content">
-        <h2>{vacancy.title}</h2>
-        <p>{vacancy.description}</p>
-        <h3>{vacancy.location}</h3>
-        {vacancy.tags && vacancy.tags.map((tag, index) => <p key={`${index}_${tag}`}>{tag}</p>)}
-      </div>
+
+      <h1>{vacancy.title}</h1>
+      {vacancy.tags && vacancy.tags.map((tag, index) => <p key={`${index}_${tag}`}>{tag}</p>)}
+      <h3>{vacancy.location}</h3>
+      <Link href={`${vacancy.contact.linkedIn}`}>
+        <a className="btn-primary">Contactar recrutador</a>
+      </Link>
+      <h2>Description:</h2>
+      <p>{vacancy.description}</p>
       <Footer />
     </>
   );
 }
 
 export async function getStaticPaths() {
-  const res = await fetch('http://localhost:3333/vacancies');
-  const vacancies = await res.json();
+  const { data: vacancies } = await api.get('/vacancies');
   const paths = vacancies.map(vacancy => `/vaga/${vacancy._id}`);
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`http://localhost:3333/vacancy/${params.id}`);
-  const vacancy = await res.json();
+  const { data: vacancy } = await api.get(`/vacancy/${params.id}`);
   return { props: { vacancy } };
 }

@@ -16,7 +16,7 @@ export default function Login() {
   const handleLogin = async () => {
     const result = await userLogin(email, password);
     if (result) {
-      Router.push('/main');
+      return Router.push('/main');
     }
     setError(result);
   };
