@@ -7,11 +7,9 @@ import Footer from '@components/Footer';
 import Link from 'next/link';
 
 export default function Vacancy({ vacancy }) {
-  console.log(vacancy);
   return (
     <>
       <Navbar />
-
       <h1>{vacancy.title}</h1>
       {vacancy.tags && vacancy.tags.map((tag, index) => <p key={`${index}_${tag}`}>{tag}</p>)}
       <h3>{vacancy.location}</h3>
