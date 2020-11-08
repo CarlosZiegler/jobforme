@@ -1,27 +1,41 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import api from '@services/Api';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 import Conditional from '@components/Conditional';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Vacancy({ vacancy }) {
+  const router = useRouter();
   return (
     <>
-      <Conditional when={vacancy !== undefined}>
-        <Navbar />
-        <h1>{vacancy.title}</h1>
-        {vacancy.tags && vacancy.tags.map((tag, index) => <p key={`${index}_${tag}`}>{tag}</p>)}
-        <h3>{vacancy.location}</h3>
-        <Link href={`${vacancy.contact.linkedIn}`}>
-          <a className="btn-primary">Contactar recrutador</a>
-        </Link>
-        <h2>Description:</h2>
-        <p>{vacancy.description}</p>
-        <Footer />
-      </Conditional>
+      <Navbar />
+      <div className="main-content">
+        <Conditional when={vacancy !== undefined}>
+          <h1>{vacancy.title}</h1>
+          <span>
+            {vacancy.tags &&
+              vacancy.tags.map((tag, index) => (
+                <span className="result-info" key={`${index}_${tag}`}>
+                  {tag}
+                </span>
+              ))}
+          </span>
+          <h3>{vacancy.location}</h3>
+          <Link href={`${vacancy.contact.linkedIn}`}>
+            <a className="btn-primary">Contactar recrutador</a>
+          </Link>
+          <h2>Description:</h2>
+          <p>{vacancy.description}</p>
+          <span onClick={() => router.back()} className="btn-primary">
+            Voltar
+          </span>
+          <Footer />
+        </Conditional>
+      </div>
     </>
   );
 }
