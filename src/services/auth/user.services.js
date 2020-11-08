@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import api from '@services/Api';
 
-export const userSignup = async (newUserData) => {
+export const userSignup = async newUserData => {
   try {
     const { data } = await api.post('/signup', newUserData);
     if (data?.hasOwnProperty('error')) {
@@ -17,7 +17,8 @@ export const userSignup = async (newUserData) => {
 export const userLogin = async (email, password) => {
   try {
     const { data } = await api.post('/login', {
-      email, password,
+      email,
+      password,
     });
     if (data?.hasOwnProperty('error')) {
       return data.error;

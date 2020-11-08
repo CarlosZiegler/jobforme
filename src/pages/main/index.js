@@ -51,7 +51,6 @@ export default function Main() {
 
   useEffect(() => {
     if (user != null && user?.role === 'company') {
-      console.log(user);
       setVacancies(user.vacancies);
     }
   }, [user]);
