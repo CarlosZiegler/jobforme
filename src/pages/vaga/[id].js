@@ -8,9 +8,10 @@ import Conditional from '@components/Conditional';
 import Link from 'next/link';
 
 export default function Vacancy({ vacancy }) {
+  console.log(vacancy);
   return (
     <>
-      <Conditional when={vacancy ?? false}>
+      <Conditional when={vacancy !== undefined}>
         <Navbar />
         <h1>{vacancy.title}</h1>
         {vacancy.tags && vacancy.tags.map((tag, index) => <p key={`${index}_${tag}`}>{tag}</p>)}
@@ -29,7 +30,7 @@ export default function Vacancy({ vacancy }) {
 export async function getStaticPaths() {
   const { data: vacancies } = await api.get('/vacancies');
   const paths = vacancies.map(vacancy => `/vaga/${vacancy._id}`);
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
