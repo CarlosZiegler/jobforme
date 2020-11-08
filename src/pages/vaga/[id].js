@@ -8,7 +8,6 @@ import Conditional from '@components/Conditional';
 import Link from 'next/link';
 
 export default function Vacancy({ vacancy }) {
-  console.log(vacancy);
   return (
     <>
       <Conditional when={vacancy !== undefined}>
